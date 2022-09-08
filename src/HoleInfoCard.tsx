@@ -11,10 +11,11 @@ function HoleInfoCard(props: any) {
                         alignItems: "center" 
                         }}>
                         <h2>{props.name}</h2>
-                        
-                        <CardContent style={{paddingTop: '0'}}>Par {props.par}</CardContent>
-                        <CardContent style={{paddingTop: '0'}}>{props.tee}m</CardContent>
-                        <CardContent style={{paddingTop: '0'}}>SI: {props.strokeIndex}</CardContent>
+                        <div style={{paddingBottom: "1rem"}}>
+                            <CardContent style={{paddingTop: '0', display:'inline'}}>Par {props.par}</CardContent>
+                            <CardContent style={{paddingTop: '0', display:'inline'}}>{props.tee}m</CardContent>
+                            <CardContent style={{paddingTop: '0', display:'inline'}}>SI: {props.strokeIndex}</CardContent>
+                        </div>
                     </Card>
             )
 
