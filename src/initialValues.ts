@@ -18,7 +18,9 @@ export const initialCourse = {
 
 export const initialPlayers = [
     'Pauly T',
-    'Marty Bull'
+    'Marty Bull',
+    'Ross Shapley',
+    'Shane Finn'
 ]
 
 export const scorecard = [

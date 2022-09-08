@@ -1,11 +1,15 @@
 import React from 'react'
 import { initialCourse, initialPlayers, scorecard } from './initialValues'
+import PlayerCard from './PlayerCard'
+import HoleInfoCard from './HoleInfoCard'
 
 import { Typography, Paper, AppBar, Toolbar, Grid, ListItem, Divider, Card, CardHeader, CardContent } from '@mui/material';
 
 
 function GolfApp() {
     
+    let currentHoleIndex = 3;
+
     return(
         <Paper
             style={{
@@ -39,31 +43,20 @@ function GolfApp() {
                     width: '500px'
                 }}>
 
-                    <Card style={{
-                        marginBottom: '1rem', 
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: 'flex-start',
-                        alignItems: "center" 
-                        }}>
-                        <CardHeader><h2>Hole 1</h2></CardHeader>
-                        <CardContent>Stroke Index: 1</CardContent>
-                        <CardContent>Par 3</CardContent>
-                        <CardContent>245m</CardContent>
-                    </Card>
+                    <HoleInfoCard
+                        name={initialCourse.holes[currentHoleIndex].name} 
+                        par={initialCourse.holes[currentHoleIndex].par}
+                        strokeIndex={initialCourse.holes[currentHoleIndex].strokeIndex}
+                        tee={initialCourse.holes[currentHoleIndex].tee}
+                    ></HoleInfoCard>
+                    
+                    {initialPlayers.map((player, i) => (
+                        <PlayerCard 
+                            player={player}
+                            // currentHole
+                        />
+                    ))}
 
-                    {/* these need to be compponents */}
-                    <Paper style={{marginBottom: '1rem'}}>
-                    <ListItem style={{ height: "64px" }}>{initialPlayers[0]}</ListItem>
-                    <Divider />
-                    <ListItem style={{ height: "64px" }}>Shots: </ListItem>
-                    </Paper>
-
-                    <Paper>
-                    <ListItem style={{ height: "64px" }}>{initialPlayers[1]}</ListItem>
-                    <Divider />
-                    <ListItem style={{ height: "64px" }}>Shots: </ListItem>
-                    </Paper>
                 </Grid>
             </Grid>
         </Paper>
