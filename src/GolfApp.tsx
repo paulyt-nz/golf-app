@@ -4,6 +4,7 @@ import PlayerCard from './PlayerCard'
 import HoleInfoCard from './HoleInfoCard'
 
 import { Typography, Paper, AppBar, Toolbar, Grid, ListItem, Divider, Card, CardHeader, CardContent } from '@mui/material';
+import MainScorecardDisplay from './MainScorecardDisplay';
 
 // need to keep a few things in state and a few things can be set to props(? - state or props for players names)
 // State:
@@ -55,6 +56,8 @@ function GolfApp() {
                     alignItems: "stretch",
                     width: '500px'
                 }}>
+                    
+                    <MainScorecardDisplay />
 
                     <HoleInfoCard
                         name={initialCourse.holes[currentHoleIndex].name} 
