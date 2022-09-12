@@ -1,10 +1,9 @@
 import React from 'react'
 import { initialCourse, initialPlayers, scorecard } from './initialValues'
-import PlayerCard from './PlayerCard'
-import HoleInfoCard from './HoleInfoCard'
+import MainScorecardDisplay from './MainScorecardDisplay';
+import NavBar from './NavBar';
 
 import { Typography, Paper, AppBar, Toolbar, Grid, ListItem, Divider, Card, CardHeader, CardContent } from '@mui/material';
-import MainScorecardDisplay from './MainScorecardDisplay';
 
 // need to keep a few things in state and a few things can be set to props(? - state or props for players names)
 // State:
@@ -35,46 +34,17 @@ function GolfApp() {
             }}
             elevation={0}
         >
-            <AppBar color='secondary' position='static' style={{ height: "64px" }}>
-                <Toolbar>
-                    <Typography color='inherit'>SHANKERS</Typography>
-                </Toolbar>
-            </AppBar>
+            <NavBar />
 
-        
-            <Grid container style={{ 
-                marginTop: "1rem",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: 'flex-start',
-                alignItems: "center",
-            }}>
-                <Grid item xs={11} md={8} lg={4} style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: 'flex-start',
-                    alignItems: "stretch",
-                    width: '500px'
-                }}>
-                    
-                    <MainScorecardDisplay />
+            <MainScorecardDisplay 
+            name={initialCourse.holes[currentHoleIndex].name} 
+            par={initialCourse.holes[currentHoleIndex].par}
+            strokeIndex={initialCourse.holes[currentHoleIndex].strokeIndex}
+            tee={initialCourse.holes[currentHoleIndex].tee}
+            players={initialPlayers}
+            />
 
-                    <HoleInfoCard
-                        name={initialCourse.holes[currentHoleIndex].name} 
-                        par={initialCourse.holes[currentHoleIndex].par}
-                        strokeIndex={initialCourse.holes[currentHoleIndex].strokeIndex}
-                        tee={initialCourse.holes[currentHoleIndex].tee}
-                    ></HoleInfoCard>
-                    
-                    {initialPlayers.map((player, i) => (
-                        <PlayerCard 
-                            player={player}
-                            // currentHole
-                        />
-                    ))}
-
-                </Grid>
-            </Grid>
+          
         </Paper>
     )
 }
