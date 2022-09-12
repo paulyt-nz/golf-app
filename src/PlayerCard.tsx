@@ -3,11 +3,16 @@ import { Typography, Paper, ListItem, Divider, Button, IconButton } from '@mui/m
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
-function PlayerCard(props: any) {
+interface PlayerCardProps {
+    player: string
+}
+
+
+function PlayerCard({ player }: PlayerCardProps) {
 
     return(
         <Paper style={{marginBottom: '1rem'}}>
-            <ListItem style={{ height: "64px" }}>{props.player}</ListItem>
+            <ListItem style={{ height: "64px" }}>{player}</ListItem>
             {/* want it to say Front 9: 50 +10 - Back 9 (3) */}
                 <Divider />
             <ListItem style={{ 
