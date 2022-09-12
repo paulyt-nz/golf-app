@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import HoleInfoCard from './HoleInfoCard';
 import PlayerCard from './PlayerCard';
-import { Typography, Paper, AppBar, Toolbar, Grid, ListItem, Divider, Card, CardHeader, CardContent } from '@mui/material';
+import { Grid } from '@mui/material';
 
 interface MainScorecardDisplayProps {
     name: string;
@@ -17,7 +17,7 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players}: MainScore
 
     // should learn how to type these style objects properly
     // probably need to learn JSS styling too
-    const gridStyles1: any = { 
+    const gridStyles1: React.CSSProperties = { 
         marginTop: "1rem",
         display: "flex",
         flexDirection: "column",
@@ -25,7 +25,7 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players}: MainScore
         alignItems: "center",
     }
 
-    const gridStyles2: any = {
+    const gridStyles2: React.CSSProperties = {
         display: "flex",
         flexDirection: "column",
         justifyContent: 'flex-start',
