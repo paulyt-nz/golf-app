@@ -11,10 +11,13 @@ interface MainScorecardDisplayProps {
     players: string[]
 }
 
-function MainScorecardDisplay:FC<MainScorecardDisplayProps> ({name, par, strokeIndex, tee, players}) {
+function MainScorecardDisplay ({name, par, strokeIndex, tee, players}: MainScorecardDisplayProps) {
     // put the HoleInfoCards and PlayCards in here
     // want to only have the different options in the parent 
-    const gridStyles1 = { 
+
+    // should learn how to type these style objects properly
+    // probably need to learn JSS styling too
+    const gridStyles1: any = { 
         marginTop: "1rem",
         display: "flex",
         flexDirection: "column",
@@ -22,7 +25,7 @@ function MainScorecardDisplay:FC<MainScorecardDisplayProps> ({name, par, strokeI
         alignItems: "center",
     }
 
-    const gridStyles2 = {
+    const gridStyles2: any = {
         display: "flex",
         flexDirection: "column",
         justifyContent: 'flex-start',
