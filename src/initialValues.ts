@@ -23,7 +23,8 @@ export const initialPlayers = [
     'Shane Finn'
 ]
 
-export const scorecard = [
+export const scorecard = {
+    scores: [
     {p1Score: undefined, p2Score: undefined},
     {p1Score: undefined, p2Score: undefined},
     {p1Score: undefined, p2Score: undefined},
@@ -33,4 +34,4 @@ export const scorecard = [
     {p1Score: undefined, p2Score: undefined},
     {p1Score: undefined, p2Score: undefined},
     {p1Score: undefined, p2Score: undefined},
-]
+]}
