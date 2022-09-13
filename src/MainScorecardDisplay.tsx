@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React from 'react';
 import HoleInfoCard from './HoleInfoCard';
 import PlayerCard from './PlayerCard';
-import { Grid } from '@mui/material';
+import { Grid, Button } from '@mui/material';
 
 interface MainScorecardDisplayProps {
     name: string;
@@ -49,6 +49,8 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players}: MainScore
                         // currentHole
                     />
                 ))}
+
+                <Button style={{marginBottom: '1rem'}} variant="contained">SAVE AND NEXT HOLE</Button>
 
             </Grid>
         </Grid>
