@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { initialCourse, initialPlayers, scorecard } from './initialValues'
+import { initialCourse, initialPlayers, initialScorecard } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
@@ -27,12 +27,19 @@ function GolfApp() {
     const [showScorecard, toggleShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
     const [players, setPlayers] = useState(initialPlayers)
+    const [scorecard, setScorecard] = useState(initialScorecard)
 
 // Thoughts on some functions that may be needed
 //      - setUpRound - sets the players and course info for the round and generates a new blank scorecard
 //      - nextHole - saves the scores of the current hole and adds one to currentHoleIndex.
 //                   Also needs to toggle showscorecard when currenthole is greater than holes being played
 //      - resetRound - resets all state values back to their default
+
+    const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
+        let newScorecard = scorecard;
+        newScorecard[holeIndex][playerIndex] = score;
+        setScorecard(newScorecard)
+    }
 
 
 
@@ -46,11 +53,13 @@ function GolfApp() {
         mainPageRender = <FinalScoreCard />
     } else {
         mainPageRender = (<MainScorecardDisplay 
+            holeIndex={currentHoleIndex}
             name={courseInfo.holes[currentHoleIndex].name} 
             par={courseInfo.holes[currentHoleIndex].par}
             strokeIndex={courseInfo.holes[currentHoleIndex].strokeIndex}
             tee={courseInfo.holes[currentHoleIndex].tee}
             players={players}
+            updateScorecard={updateScorecard}
             />)
     }
 
