@@ -23,15 +23,16 @@ export const initialPlayers = [
     'Shane Finn'
 ]
 
-export const scorecard = {
-    scores: [
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-    {p1Score: undefined, p2Score: undefined},
-]}
+
+// need to make this dynamic based on number of players and the number of holes being played
+export const initialScorecard = [
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+]
