@@ -12,11 +12,12 @@ interface ScoreButtonProps {
 
 function ScoreButton({playerIndex, updateScorecard, holeIndex, score}: ScoreButtonProps) {
     
-    const [isSelected, toggleIsSelected] = useState(false)
+    const [isSelected, toggleIsSelected] = useState(true)
 
-    const handleClick = (score: number, playerIndex: number, holeIndex: number) => {
+    const handleClick = () => {
         updateScorecard(score, playerIndex, holeIndex);
-        toggleIsSelected(!isSelected)
+        toggleIsSelected(!isSelected);
+        console.log('inside handleclick')
     }
     
     return(

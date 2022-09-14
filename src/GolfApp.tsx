@@ -38,7 +38,10 @@ function GolfApp() {
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
         let newScorecard = scorecard;
         newScorecard[holeIndex][playerIndex] = score;
+        console.log('inside update scorecard', holeIndex, playerIndex)
+        console.log(newScorecard)
         setScorecard(newScorecard)
+        console.log(scorecard)
     }
 
 
@@ -61,7 +64,7 @@ function GolfApp() {
             players={players}
             updateScorecard={updateScorecard}
             />)
-    }
+    } 
 
     const paperStyles: React.CSSProperties = {
         padding: 0,

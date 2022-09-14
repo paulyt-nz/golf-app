@@ -42,15 +42,13 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex }: Pla
                             <KeyboardArrowLeftIcon />
                 </IconButton>                 cant get these ones working for some reason*/}
 
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score=3 />
-
-                <Button variant="contained" onClick={() => savePlayerScore(3)}>3</Button>
-                <Button variant="contained" onClick={() => savePlayerScore(4)}>4</Button>
-                <Button variant="contained" onClick={() => savePlayerScore(5)}>5</Button>
-                <Button variant="contained" onClick={() => savePlayerScore(6)}>6</Button>
-                <Button variant="contained" onClick={() => savePlayerScore(7)}>7</Button>
-                <Button variant="contained" onClick={() => savePlayerScore(8)}>8</Button>
-                
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={3} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={4} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={5} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={6} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={7} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} score={8} />
+                               
                 {/* Need to make these extra ones show up when needed */}
                 {/* <Button variant="outlined">9</Button>
                 <Button variant="outlined">10</Button> */}
