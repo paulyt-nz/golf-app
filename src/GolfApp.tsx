@@ -25,8 +25,8 @@ import FinalScoreCard from './FinalScoreCard';
 
 function GolfApp() {
     const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
-    const [isRoundSetUp, toggleIsRoundSetUp] = useState(true)
-    const [showScorecard, toggleShowScorecard] = useState(false)
+    const [isRoundSetUp, setIsRoundSetUp] = useState(true)
+    const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
     const [players, setPlayers] = useState(initialPlayers)
     const [scorecard, setScorecard] = useState(initialScorecard)
@@ -58,8 +58,16 @@ function GolfApp() {
 
         // if the new currentHoleIndex is higher than 9 we need to change showScorecard to true
         if (currentHoleIndex > courseInfo.numHoles) {
-            toggleShowScorecard(true)
+            toggleScorecard()
         }
+    }
+
+    const toggleScorecard = () => {
+        setShowScorecard(!showScorecard)
+    }
+
+    const reset = () => {
+        
     }
 
 
@@ -71,7 +79,7 @@ function GolfApp() {
     if (isRoundSetUp === false) {
         mainPageRender = <RoundSetUpForm />
     } else if (showScorecard === true) {
-        mainPageRender = <FinalScoreCard />
+        mainPageRender = <FinalScoreCard scorecard={scorecard} />
     } else {
         mainPageRender = (<MainScorecardDisplay 
             holeIndex={currentHoleIndex}
@@ -95,17 +103,8 @@ function GolfApp() {
 
     return(
         <Paper style={paperStyles}elevation={0}>
-            <NavBar />            
+            <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} />            
             {mainPageRender}
-            <p>{scorecard[0]}</p>
-            <p>{scorecard[1]}</p>
-            <p>{scorecard[2]}</p>
-            <p>{scorecard[3]}</p>
-            <p>{scorecard[4]}</p>
-            <p>{scorecard[5]}</p>
-            <p>{scorecard[6]}</p>
-            <p>{scorecard[7]}</p>
-            <p>{scorecard[8]}</p>
         </Paper>
     )
 }

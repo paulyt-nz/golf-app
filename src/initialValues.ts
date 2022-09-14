@@ -24,6 +24,9 @@ export const initialPlayers = [
 ]
 
 
+
+
+
 // need to make this dynamic based on number of players and the number of holes being played
 export const initialScorecard = [
     [0,0,0,0],
