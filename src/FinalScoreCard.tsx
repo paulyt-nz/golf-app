@@ -6,6 +6,8 @@ interface FinalScoreCardProps {
 
 function FinalScoreCard({scorecard}: FinalScoreCardProps) {
     // render out a table with everyones scores for each hole and overall score and par comparisons
+
+    // will also need to drop the navbar scorecard button when a round is completed
     return (
         <>
         <h2>Final Scorecard!</h2>

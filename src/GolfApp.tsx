@@ -24,7 +24,7 @@ import FinalScoreCard from './FinalScoreCard';
     type Scorecard = HoleScores[]
 
 function GolfApp() {
-    const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
+    const [currentHoleIndex, setCurrentHoleIndex] = useState(8)
     const [isRoundSetUp, setIsRoundSetUp] = useState(true)
     const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
@@ -54,10 +54,14 @@ function GolfApp() {
         }
 
         // if no zeros then we add one to the currentHoleIndex
-        setCurrentHoleIndex(currentHoleIndex + 1);
-
-        // if the new currentHoleIndex is higher than 9 we need to change showScorecard to true
-        if (currentHoleIndex > courseInfo.numHoles) {
+        
+        if (currentHoleIndex < courseInfo.numHoles - 1) {
+            setCurrentHoleIndex(currentHoleIndex + 1);
+            console.debug("running in nexHole - after incrementing current hole")
+            console.debug("current hole index: ", currentHoleIndex)
+            console.debug("numHoles: ", courseInfo.numHoles)
+        } else {
+            console.debug("running in nextHole - just before toggleScorecard")
             toggleScorecard()
         }
     }
