@@ -15,11 +15,7 @@ interface PlayerCardProps {
 function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex }: PlayerCardProps) {
     const [playerScore, setPlayerScore] = useState(0);
 
-    const savePlayerScore = (score: number) => {
-        setPlayerScore(score);
-        // add in some sort of disabling of the other buttons here
-        console.log('player score is: ', playerScore) //very slow to update.....
-    }
+    // will need a function that disables or changes the other buttons when one is selected
 
     const listItemStyles = {
         height: "64px",

@@ -19,10 +19,12 @@ import FinalScoreCard from './FinalScoreCard';
     // isRoundFinished - will need to make a final scorecard component that will show up at the end after the last hole
     // probably want one at the end of the front nine
 
+    type HoleScores = []
 
+    type Scorecard = HoleScores[]
 
 function GolfApp() {
-    const [currentHoleIndex, setCurrentHoleIndex] = useState(3)
+    const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
     const [isRoundSetUp, toggleIsRoundSetUp] = useState(true)
     const [showScorecard, toggleShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
@@ -44,6 +46,22 @@ function GolfApp() {
         console.log(scorecard)
     }
 
+    const nextHole = (currentHoleIndex: number, scorecard: number[][]) => {
+        // needs to check there are no zero entrys in the current round
+        let isThereEmptyScores = scorecard[currentHoleIndex].some(score => score === 0) // should give true or false
+        if (isThereEmptyScores) {
+            return alert('Need to check all the players scores')  // can make a better system for this later
+        }
+
+        // if no zeros then we add one to the currentHoleIndex
+        setCurrentHoleIndex(currentHoleIndex + 1);
+
+        // if the new currentHoleIndex is higher than 9 we need to change showScorecard to true
+        if (currentHoleIndex > courseInfo.numHoles) {
+            toggleShowScorecard(true)
+        }
+    }
+
 
 
 
@@ -63,6 +81,8 @@ function GolfApp() {
             tee={courseInfo.holes[currentHoleIndex].tee}
             players={players}
             updateScorecard={updateScorecard}
+            nextHole={nextHole}
+            scorecard={scorecard}
             />)
     } 
 
@@ -77,6 +97,15 @@ function GolfApp() {
         <Paper style={paperStyles}elevation={0}>
             <NavBar />            
             {mainPageRender}
+            <p>{scorecard[0]}</p>
+            <p>{scorecard[1]}</p>
+            <p>{scorecard[2]}</p>
+            <p>{scorecard[3]}</p>
+            <p>{scorecard[4]}</p>
+            <p>{scorecard[5]}</p>
+            <p>{scorecard[6]}</p>
+            <p>{scorecard[7]}</p>
+            <p>{scorecard[8]}</p>
         </Paper>
     )
 }

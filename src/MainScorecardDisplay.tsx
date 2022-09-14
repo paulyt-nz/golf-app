@@ -9,20 +9,20 @@ interface MainScorecardDisplayProps {
     par: number;
     strokeIndex: number;
     tee: number;
-    players: string[],
+    players: string[];
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void;
-    holeIndex: number
+    holeIndex: number;
+    nextHole: (currentHoleIndex: number, scorecard: number[][]) => void;
+    scorecard: number[][]
 }
 
-type HoleScores = []
 
-type Scorecard = HoleScores[]
   
 
 
 // type Scorecard = HoleScores[] this one needs to be up a layer
 
-function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex}: MainScorecardDisplayProps) {
+function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex, nextHole, scorecard}: MainScorecardDisplayProps) {
     // put the HoleInfoCards and PlayCards in here
     // want to only have the different options in the parent 
 
@@ -46,6 +46,10 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
         width: '500px'
     }
 
+    const handleClick = () => {
+        nextHole(holeIndex, scorecard)
+    }
+
 
 
     return (
@@ -67,7 +71,9 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
                     />
                 ))}
 
-                <Button style={{marginBottom: '1rem'}} variant="contained">SAVE AND NEXT HOLE</Button>
+                <Button style={{marginBottom: '1rem'}} variant="contained" onClick={handleClick}>
+                        SAVE AND NEXT HOLE
+                </Button>
 
             </Grid>
         </Grid>
