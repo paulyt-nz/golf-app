@@ -24,12 +24,21 @@ import FinalScoreCard from './FinalScoreCard';
     type Scorecard = HoleScores[]
 
 function GolfApp() {
+
+    const allButtonsNotSelected = [
+        [false,false,false,false,false,false], 
+        [false,false,false,false,false,false], 
+        [false,false,false,false,false,false], 
+        [false,false,false,false,false,false], 
+    ]
+
     const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
     const [isRoundSetUp, setIsRoundSetUp] = useState(true)
     const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
     const [players, setPlayers] = useState(initialPlayers)
     const [scorecard, setScorecard] = useState(initialScorecard)
+    const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
 
 // Thoughts on some functions that may be needed
 //      - setUpRound - sets the players and course info for the round and generates a new blank scorecard
@@ -44,6 +53,14 @@ function GolfApp() {
         console.log(newScorecard)
         setScorecard(newScorecard)
         console.log(scorecard)
+    }
+
+    const selectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
+        let newButtonsSelected = isButtonSelected
+        newButtonsSelected[playerIndex][indexOfThisButton] = true
+        console.log("newButtonSelected: ", newButtonsSelected)
+        setIsButtonSelected(newButtonsSelected)
+
     }
 
     const nextHole = (currentHoleIndex: number, scorecard: number[][]) => {
@@ -64,6 +81,7 @@ function GolfApp() {
             console.debug("running in nextHole - just before toggleScorecard")
             toggleScorecard()
         }
+        setIsButtonSelected(allButtonsNotSelected);
     }
 
     const toggleScorecard = () => {
@@ -117,6 +135,8 @@ function GolfApp() {
             updateScorecard={updateScorecard}
             nextHole={nextHole}
             scorecard={scorecard}
+            selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem}
+            isButtonSelected={isButtonSelected}
             />)
     } 
 
@@ -127,6 +147,9 @@ function GolfApp() {
         backgroundColor: "#fafafa",
     }
 
+
+
+    
     return(
         <Paper style={paperStyles}elevation={0}>
             <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} reset={reset} />            

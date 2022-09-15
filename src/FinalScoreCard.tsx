@@ -25,7 +25,7 @@ function FinalScoreCard({scorecard, players, courseInfo}: FinalScoreCardProps) {
                         {courseInfo.holes.map((hole: any) => 
                             <TableCell align="right">{hole.name}</TableCell>
                         )}
-                        <TableCell>Total</TableCell>
+                        <TableCell align="right">Total</TableCell>
                     </TableRow>
                     </TableHead>
 
@@ -34,7 +34,7 @@ function FinalScoreCard({scorecard, players, courseInfo}: FinalScoreCardProps) {
                             <PlayerRow scorecard={scorecard} player={player} playerIndex={i} />
                         )}                  
                     </TableBody>
-                    
+
                 </Table>
             </TableContainer>
         </>

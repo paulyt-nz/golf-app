@@ -14,6 +14,8 @@ interface MainScorecardDisplayProps {
     holeIndex: number;
     nextHole: (currentHoleIndex: number, scorecard: number[][]) => void;
     scorecard: number[][]
+    selectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
+    isButtonSelected: boolean[][]
 }
 
 
@@ -22,7 +24,7 @@ interface MainScorecardDisplayProps {
 
 // type Scorecard = HoleScores[] this one needs to be up a layer
 
-function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex, nextHole, scorecard}: MainScorecardDisplayProps) {
+function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex, nextHole, scorecard, selectThisButtonAndDeselectTheRestOfThem, isButtonSelected}: MainScorecardDisplayProps) {
     // put the HoleInfoCards and PlayCards in here
     // want to only have the different options in the parent 
 
@@ -68,6 +70,8 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
                         playerIndex={i}
                         updateScorecard={updateScorecard}
                         holeIndex={holeIndex}
+                        selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem}
+                        isButtonSelected={isButtonSelected[1]}
                     />
                 ))}
 
