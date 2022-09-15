@@ -1,4 +1,12 @@
-export const initialCourse = {
+export interface Course {
+    name: string,
+    location: string,
+    numHoles: number,
+    holes: any,
+}
+
+
+export const initialCourse: Course = {
     name: 'Pauatahanui Golf Course',
     location: 'Pauatahanui, Porirua',
     numHoles: 9,
@@ -39,3 +47,5 @@ export const initialScorecard = [
     [0,0,0,0],
     [0,0,0,0],
 ]
+
+export const blankScorecard = initialScorecard

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { initialCourse, initialPlayers, initialScorecard } from './initialValues'
+import { initialCourse, initialPlayers, initialScorecard, blankScorecard } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
@@ -24,7 +24,7 @@ import FinalScoreCard from './FinalScoreCard';
     type Scorecard = HoleScores[]
 
 function GolfApp() {
-    const [currentHoleIndex, setCurrentHoleIndex] = useState(8)
+    const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
     const [isRoundSetUp, setIsRoundSetUp] = useState(true)
     const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
@@ -70,8 +70,26 @@ function GolfApp() {
         setShowScorecard(!showScorecard)
     }
 
+   
     const reset = () => {
-        
+       // setIsRoundSetUp(false) // will need this for my set up form
+       // setPlayers([])
+       // setCourseInfo(not sure what goes here)
+       const blankScorecard = [ // need to figure out why this wouldnt work as planned
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+        [0,0,0,0],
+    ]
+
+       setCurrentHoleIndex(0);
+       setScorecard(blankScorecard);
+       setShowScorecard(false)
     }
 
 
@@ -83,7 +101,11 @@ function GolfApp() {
     if (isRoundSetUp === false) {
         mainPageRender = <RoundSetUpForm />
     } else if (showScorecard === true) {
-        mainPageRender = <FinalScoreCard scorecard={scorecard} />
+        mainPageRender = <FinalScoreCard 
+            courseInfo={courseInfo}
+            players={players}
+            scorecard={scorecard} 
+            />
     } else {
         mainPageRender = (<MainScorecardDisplay 
             holeIndex={currentHoleIndex}
@@ -107,7 +129,7 @@ function GolfApp() {
 
     return(
         <Paper style={paperStyles}elevation={0}>
-            <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} />            
+            <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} reset={reset} />            
             {mainPageRender}
         </Paper>
     )
