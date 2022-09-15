@@ -28,7 +28,8 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex }: Pla
         <Paper style={{marginBottom: '1rem'}}>
             <ListItem style={{ height: "64px" }}>{playerName}</ListItem>
             {/* want it to say Front 9: 50 +10 - Back 9 (3) */}
-                <Divider />
+            <Divider />
+
             <ListItem style={listItemStyles}> 
                 {/* change the button variant to "contained" when it is selected */}
                 {/* <Button variant="outlined">1</Button>
