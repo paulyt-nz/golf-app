@@ -10,7 +10,7 @@ interface PlayerCardProps {
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void,
     holeIndex: number
     selectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
-    isButtonSelected: boolean[]
+    isButtonSelected: boolean[][]
 }
 
 
@@ -49,12 +49,12 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, selec
                             <KeyboardArrowLeftIcon />
                 </IconButton>                 cant get these ones working for some reason*/}
 
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[0]} score={3} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={0} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[1]} score={4} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={1} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[2]} score={5} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={2} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[3]} score={6} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={3} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[4]} score={7} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={4} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isSelected={isButtonSelected[5]} score={8} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={5} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={3} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={0} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={4} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={1} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={5} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={2} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={6} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={3} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={7} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={4} />
+                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={8} selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem} buttonIndex={5} />
                                
                 {/* Need to make these extra ones show up when needed */}
                 {/* <Button variant="outlined">9</Button>

@@ -6,25 +6,28 @@ interface ScoreButtonProps {
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void;
     holeIndex: number;
     score: number;
-    isSelected: boolean
+    isButtonSelected: boolean[][]
     selectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
     buttonIndex: number
 }
 
 
 
-function ScoreButton( {playerIndex, updateScorecard, holeIndex, score, isSelected, selectThisButtonAndDeselectTheRestOfThem, buttonIndex }: ScoreButtonProps) {
+function ScoreButton( {playerIndex, updateScorecard, holeIndex, score, isButtonSelected, selectThisButtonAndDeselectTheRestOfThem, buttonIndex }: ScoreButtonProps) {
     
     // const [isSelected, toggleIsSelected] = useState(true)
 
     const handleClick = () => {
+        console.log('******  start of ScoreButton handleclick  ******')
         updateScorecard(score, playerIndex, holeIndex);
         selectThisButtonAndDeselectTheRestOfThem(buttonIndex, playerIndex);
-        console.log('inside handleclick')
+        console.log('******  end of ScoreButton handleclick  ******')
     }
+
+    console.log(isButtonSelected[playerIndex][buttonIndex])
     
     return(
-        <Button variant={isSelected ? "contained" : "outlined"} onClick={handleClick}>{score}</Button>
+        <Button variant={isButtonSelected[playerIndex][buttonIndex] ? "contained" : "outlined"} onClick={handleClick}>{score}</Button>
     )
 
 }

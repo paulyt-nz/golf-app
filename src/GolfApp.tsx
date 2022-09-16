@@ -47,20 +47,28 @@ function GolfApp() {
 //      - resetRound - resets all state values back to their default
 
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
+        console.log('^^^^^^  start of updateScorecard  ^^^^^^')
         let newScorecard = scorecard;
         newScorecard[holeIndex][playerIndex] = score;
         console.log('inside update scorecard', holeIndex, playerIndex)
         console.log(newScorecard)
         setScorecard(newScorecard)
         console.log(scorecard)
+        console.log('^^^^^^  end of updateScorecard  ^^^^^^')
     }
 
     const selectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
+        console.log("%%%%%%%  start of selectThisButtonAndDeselectTheRestOfThem %%%%%%")
+        console.log(isButtonSelected)
+
         let newButtonsSelected = isButtonSelected
+        newButtonsSelected[playerIndex] = [ false, false, false, false, false, false]
         newButtonsSelected[playerIndex][indexOfThisButton] = true
-        console.log("newButtonSelected: ", newButtonsSelected)
+        console.log(newButtonsSelected)
+        
         setIsButtonSelected(newButtonsSelected)
 
+        console.log("%%%%%%%  end of selectThisButtonAndDeselectTheRestOfThem %%%%%%")
     }
 
     const nextHole = (currentHoleIndex: number, scorecard: number[][]) => {
@@ -82,6 +90,7 @@ function GolfApp() {
             toggleScorecard()
         }
         setIsButtonSelected(allButtonsNotSelected);
+        console.log('all buttons selected from ')
     }
 
     const toggleScorecard = () => {
@@ -108,6 +117,7 @@ function GolfApp() {
        setCurrentHoleIndex(0);
        setScorecard(blankScorecard);
        setShowScorecard(false)
+       setIsButtonSelected(allButtonsNotSelected)
     }
 
 
@@ -149,7 +159,7 @@ function GolfApp() {
 
 
 
-    
+
     return(
         <Paper style={paperStyles}elevation={0}>
             <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} reset={reset} />            

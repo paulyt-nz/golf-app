@@ -71,7 +71,7 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
                         updateScorecard={updateScorecard}
                         holeIndex={holeIndex}
                         selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem}
-                        isButtonSelected={isButtonSelected[1]}
+                        isButtonSelected={isButtonSelected}
                     />
                 ))}
 
