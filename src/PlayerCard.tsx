@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
-import { Typography, Paper, ListItem, Divider, Button, IconButton } from '@mui/material';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { Paper, ListItem, Divider } from '@mui/material';
 import ScoreButton from './ScoreButton';
 
 interface PlayerCardProps {
@@ -13,19 +11,15 @@ interface PlayerCardProps {
     isButtonSelected: boolean[][]
 }
 
+// lots more to add in here
+//  - score so far
+//  - +/- par so far
+//  - last hole score
+//
+// Also need to sort out the buttons properly - more options, map over them
 
 function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected }: PlayerCardProps) {
     const [isSelected, setIsSelected] = useState([false,false,false,false,false,false]);
-
-    // will need a function that disables or changes the other buttons when one is selected
-    // const selectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number) => {
-    //     let newSelected = [false,false,false,false,false,false];
-    //     newSelected[indexOfThisButton] = true;
-    //     setIsSelected(newSelected)
-    // }
-
-
-
 
     const listItemStyles = {
         height: "64px",
@@ -37,18 +31,11 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
     return(
         <Paper style={{marginBottom: '1rem'}}>
             <ListItem style={{ height: "64px" }}>{playerName}</ListItem>
-            {/* want it to say Front 9: 50 +10 - Back 9 (3) */}
+            
             <Divider />
 
             <ListItem style={listItemStyles}> 
-                {/* change the button variant to "contained" when it is selected */}
-                {/* <Button variant="outlined">1</Button>
-                <Button variant="outlined">2</Button> */}
-                {/* these need to show up when you hit the arrows */}
-                {/* <IconButton variant="outlined">
-                            <KeyboardArrowLeftIcon />
-                </IconButton>                 cant get these ones working for some reason*/}
-
+               
                 <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={3} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={0} />
                 <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={4} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={1} />
                 <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={5} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={2} />
@@ -56,11 +43,8 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
                 <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={7} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={4} />
                 <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={8} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={5} />
                                
-                {/* Need to make these extra ones show up when needed */}
-                {/* <Button variant="outlined">9</Button>
-                <Button variant="outlined">10</Button> */}
             </ListItem>
-            {/* this one needs to have buttons for all the shots  */}
+            
         </Paper>
     )
 

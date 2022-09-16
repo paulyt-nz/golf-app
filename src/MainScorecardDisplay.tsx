@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import HoleInfoCard from './HoleInfoCard';
 import PlayerCard from './PlayerCard';
 import { Grid, Button } from '@mui/material';
@@ -19,18 +19,7 @@ interface MainScorecardDisplayProps {
 }
 
 
-  
-
-
-// type Scorecard = HoleScores[] this one needs to be up a layer
-
 function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex, nextHole, scorecard, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected}: MainScorecardDisplayProps) {
-    // put the HoleInfoCards and PlayCards in here
-    // want to only have the different options in the parent 
-
-    // should learn how to type these style objects properly
-    // probably need to learn JSS styling too
-
     
     const gridStyles1: React.CSSProperties = { 
         marginTop: "1rem",
@@ -51,8 +40,6 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
     const handleClick = () => {
         nextHole(holeIndex, scorecard)
     }
-
-
 
     return (
         <Grid container style={gridStyles1}>
