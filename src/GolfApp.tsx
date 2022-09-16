@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import { Typography, Paper, AppBar, Toolbar, Grid, ListItem, Divider, Card, CardHeader, CardContent } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
+//import { useForceUpdate } from './useForceUpdate'
 
 // need to keep a few things in state and a few things can be set to props(? - state or props for players names)
 // State:
@@ -23,6 +24,16 @@ import FinalScoreCard from './FinalScoreCard';
 
     type Scorecard = HoleScores[]
 
+// function useForceUpdate() {
+//     const [value, setValue] = useState(0); // integer state
+//     console.log('value from useForceUpdate: ', value)
+//     return () => setValue(value => value + 1); // update state to force render
+//     // An function that increment 👆🏻 the previous state like here 
+//     // is better than directly setting `value + 1`
+// }
+    
+
+
 function GolfApp() {
 
     const allButtonsNotSelected = [
@@ -39,6 +50,7 @@ function GolfApp() {
     const [players, setPlayers] = useState(initialPlayers)
     const [scorecard, setScorecard] = useState(initialScorecard)
     const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
+    const [value, setValue] = useState(0);
 
 // Thoughts on some functions that may be needed
 //      - setUpRound - sets the players and course info for the round and generates a new blank scorecard
@@ -57,7 +69,7 @@ function GolfApp() {
         console.log('^^^^^^  end of updateScorecard  ^^^^^^')
     }
 
-    const selectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
+    const useSelectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
         console.log("%%%%%%%  start of selectThisButtonAndDeselectTheRestOfThem %%%%%%")
         console.log(isButtonSelected)
 
@@ -65,8 +77,9 @@ function GolfApp() {
         newButtonsSelected[playerIndex] = [ false, false, false, false, false, false]
         newButtonsSelected[playerIndex][indexOfThisButton] = true
         console.log(newButtonsSelected)
-        
+
         setIsButtonSelected(newButtonsSelected)
+        setValue(value => value + 1)
 
         console.log("%%%%%%%  end of selectThisButtonAndDeselectTheRestOfThem %%%%%%")
     }
@@ -89,8 +102,15 @@ function GolfApp() {
             console.debug("running in nextHole - just before toggleScorecard")
             toggleScorecard()
         }
-        setIsButtonSelected(allButtonsNotSelected);
-        console.log('all buttons selected from ')
+
+        const resetButtons = [
+            [false,false,false,false,false,false], 
+            [false,false,false,false,false,false], 
+            [false,false,false,false,false,false], 
+            [false,false,false,false,false,false], 
+        ]
+        setIsButtonSelected(resetButtons);
+        console.log('all buttons selected from nextHole(): ', allButtonsNotSelected)
     }
 
     const toggleScorecard = () => {
@@ -117,6 +137,7 @@ function GolfApp() {
        setCurrentHoleIndex(0);
        setScorecard(blankScorecard);
        setShowScorecard(false)
+       console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
        setIsButtonSelected(allButtonsNotSelected)
     }
 
@@ -145,7 +166,7 @@ function GolfApp() {
             updateScorecard={updateScorecard}
             nextHole={nextHole}
             scorecard={scorecard}
-            selectThisButtonAndDeselectTheRestOfThem={selectThisButtonAndDeselectTheRestOfThem}
+            useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem}
             isButtonSelected={isButtonSelected}
             />)
     } 
