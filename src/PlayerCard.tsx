@@ -28,6 +28,8 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
         justifyContent: "space-evenly"
     }
 
+    const buttonScores = [ 3, 4, 5, 6, 7, 8]
+
     return(
         <Paper style={{marginBottom: '1rem'}}>
             <ListItem style={{ height: "64px" }}>{playerName}</ListItem>
@@ -36,13 +38,17 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
 
             <ListItem style={listItemStyles}> 
                
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={3} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={0} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={4} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={1} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={5} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={2} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={6} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={3} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={7} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={4} />
-                <ScoreButton playerIndex={playerIndex} updateScorecard={updateScorecard} holeIndex={holeIndex} isButtonSelected={isButtonSelected} score={8} useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} buttonIndex={5} />
-                               
+                {buttonScores.map((buttonScore, i) => (
+                    <ScoreButton 
+                        playerIndex={playerIndex} 
+                        updateScorecard={updateScorecard} 
+                        holeIndex={holeIndex} 
+                        isButtonSelected={isButtonSelected} 
+                        score={buttonScore} 
+                        useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} 
+                        buttonIndex={i} />
+                ))}
+
             </ListItem>
             
         </Paper>
