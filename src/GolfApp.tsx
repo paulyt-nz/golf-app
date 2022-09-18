@@ -32,10 +32,10 @@ function GolfApp() {
     ]
 
     const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
-    const [isRoundSetUp, setIsRoundSetUp] = useState(true)
+    const [isRoundSetUp, setIsRoundSetUp] = useState(false)
     const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
-    const [players, setPlayers] = useState(initialPlayers)
+    const [players, setPlayers] = useState(['Pauly T'])
     const [scorecard, setScorecard] = useState(initialScorecard)
     const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
     const [value, setValue] = useState(0);
@@ -105,6 +105,14 @@ function GolfApp() {
        setShowScorecard(false)
        console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
        setIsButtonSelected(allButtonsNotSelected)
+       setIsRoundSetUp(false)
+    }
+
+    const addPlayerToRound = (newPlayerName: string) => {
+        const newPlayers = players
+        newPlayers.push(newPlayerName)
+        setPlayers(newPlayers)
+        setValue(value => value + 1)
     }
 
     const paperStyles: React.CSSProperties = {
@@ -120,13 +128,18 @@ function GolfApp() {
     let mainPageRender;
 
     if (isRoundSetUp === false) {
-        mainPageRender = <RoundSetUpForm />
+        mainPageRender = <RoundSetUpForm 
+            addPlayerToRound={addPlayerToRound}
+            players={players}
+            />
+
     } else if (showScorecard === true) {
         mainPageRender = <FinalScoreCard 
             courseInfo={courseInfo}
             players={players}
             scorecard={scorecard} 
             />
+
     } else {
         mainPageRender = (<MainScorecardDisplay 
             holeIndex={currentHoleIndex}
