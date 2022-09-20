@@ -1,15 +1,17 @@
-import React, { ReactEventHandler, useState } from 'react'
+import React, { useState } from 'react'
 import { Paper, TextField, Grid, Card, CardContent, Button } from '@mui/material';
+import { Player } from './commonTypes'
 
 interface RoundSetUpFormProps {
     // some function needed to handle the imports
-    addPlayerToRound: (newPlayerName: string) => void
-    players: string[]
-    submitRound: () => void
+    addPlayerToRound: (newPlayerName: Player ) => void,
+    players: Player[],
+    startNewRound: () => void,
+    generateNewScorecard: () => void 
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFormProps) {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
 
@@ -23,18 +25,19 @@ function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFo
         console.log(e.target.value)
     }
 
-    const handlePlayerFormSubmit = (e : any) => {
+    const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
         addPlayerToRound(playerFormContent)
         setPlayerFormContent("")
     }
 
-    const handleBeginRoundSubmit = (e: any) => {
+    const handleBeginRoundSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (playerFormContent !== ""){
             addPlayerToRound(playerFormContent)
         }
-        submitRound()
+        generateNewScorecard()
+        startNewRound()
     }
 
 // *************************************************************************************//
@@ -66,7 +69,7 @@ function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFo
 // *************************************************************************************//
 // conditional redering logic for the form
 
-    let playerForm : any
+    let playerForm : JSX.Element
     if (players.length < 4) {
         playerForm = (
             <form onSubmit={handlePlayerFormSubmit} >

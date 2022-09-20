@@ -6,9 +6,10 @@ import NavBar from './NavBar';
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
+import { Player, Scorecard, NumHoles, Course } from './commonTypes'
 
 
-function GolfApp() {
+function GolfApp(): JSX.Element {
 
 // *************************************************************************************//
 // State    
@@ -16,10 +17,12 @@ function GolfApp() {
     const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
     const [isRoundSetUp, setIsRoundSetUp] = useState(false)
     const [showScorecard, setShowScorecard] = useState(false)
-    const [courseInfo, setCourseInfo] = useState(pauatahanui)
-    const [players, setPlayers] = useState(initialPlayers)
-    const [scorecard, setScorecard] = useState(initialScorecard)
+    const [courseInfo, setCourseInfo] = useState<Course>(pauatahanui)
+    const [players, setPlayers] = useState<Player[]>([])
+    const [scorecard, setScorecard] = useState<Scorecard>([]) 
     const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
+    const [numHoles , setNumHoles] = useState<NumHoles>(9)
+
     const [value, setValue] = useState(0);
 
 // *************************************************************************************//
@@ -39,7 +42,7 @@ function GolfApp() {
         setValue(value => value + 1)
     }
 
-    const nextHole = (currentHoleIndex: number, scorecard: number[][]) => {
+    const nextHole = (currentHoleIndex: number, scorecard: Scorecard) => {
         let isThereEmptyScores = scorecard[currentHoleIndex].some(score => score === 0) // should give true or false
         if (isThereEmptyScores) {
             return alert('Oi, check all the players scores!')  // can make a better system for this later
@@ -86,14 +89,21 @@ function GolfApp() {
         setPlayers([])
     }
 
-    const addPlayerToRound = (newPlayerName: string): void => {
+    const addPlayerToRound = (newPlayerName: Player): void => {
         let newPlayers = [...players, newPlayerName]
         setPlayers(newPlayers)
         // setValue(value => value + 1)
     }
 
-    const submitRound = (): void => {
+    const startNewRound = (): void => {
         setIsRoundSetUp(true)
+    }
+
+    const generateNewScorecard = (): void => {
+        // loop through numHoles and players making an array of arrays of 0
+        let holeScores = new Array(players.length).fill(0);
+        let newScorecard = new Array(numHoles).fill(holeScores);
+        setScorecard(newScorecard)
     }
 
 // *************************************************************************************//
@@ -115,7 +125,8 @@ function GolfApp() {
         mainPageRender = <RoundSetUpForm 
             addPlayerToRound={addPlayerToRound}
             players={players}
-            submitRound={submitRound}
+            startNewRound={startNewRound}
+            generateNewScorecard={generateNewScorecard}
             />
 
     } else if (showScorecard === true) {

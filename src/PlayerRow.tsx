@@ -1,15 +1,16 @@
 import React from 'react'
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { TableCell, TableRow } from '@mui/material';
+import { Player, Scorecard } from './commonTypes'
 
 interface PlayerRowProps {
-    scorecard: number[][]
-    player: string
+    scorecard: Scorecard
+    player: Player
     playerIndex: number
 }
 
-function PlayerRow({scorecard, player, playerIndex}: PlayerRowProps) {
+function PlayerRow({scorecard, player, playerIndex}: PlayerRowProps) : JSX.Element {
 
-    const sumScores = (playerIndex: number, scorecard: number[][]) => {
+    const sumScores = (playerIndex: number, scorecard: Scorecard) => {
         let sum = 0;
         for(let scores of scorecard) {
             sum = sum + scores[playerIndex];
