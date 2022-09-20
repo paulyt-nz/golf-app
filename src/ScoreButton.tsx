@@ -1,5 +1,5 @@
-
 import { Button } from '@mui/material';
+import { Buttons } from './commonTypes'
 
 
 interface ScoreButtonProps {
@@ -7,13 +7,13 @@ interface ScoreButtonProps {
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void;
     holeIndex: number;
     score: number;
-    isButtonSelected: boolean[][]
+    isButtonSelected: Buttons
     useSelectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
     buttonIndex: number
 }
 
 
-function ScoreButton( {playerIndex, updateScorecard, holeIndex, score, isButtonSelected, useSelectThisButtonAndDeselectTheRestOfThem, buttonIndex }: ScoreButtonProps) {
+function ScoreButton( {playerIndex, updateScorecard, holeIndex, score, isButtonSelected, useSelectThisButtonAndDeselectTheRestOfThem, buttonIndex }: ScoreButtonProps): JSX.Element {
 
     const useHandleClick = () => {
         updateScorecard(score, playerIndex, holeIndex);

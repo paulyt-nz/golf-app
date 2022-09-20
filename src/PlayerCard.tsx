@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Paper, ListItem, Divider } from '@mui/material';
 import ScoreButton from './ScoreButton';
+import { Player, Buttons } from './commonTypes'
 
 interface PlayerCardProps {
-    playerName: string,
+    playerName: Player,
     playerIndex: number,
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void,
     holeIndex: number
     useSelectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
-    isButtonSelected: boolean[][]
+    isButtonSelected: Buttons
 }
 
 // lots more to add in here
@@ -17,7 +18,7 @@ interface PlayerCardProps {
 //  - last hole score
 //  - more button options
 
-function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected }: PlayerCardProps) {
+function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected }: PlayerCardProps): JSX.Element {
     
     const listItemStyles = {
         height: "64px",
