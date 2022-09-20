@@ -9,16 +9,11 @@ interface RoundSetUpFormProps {
 }
 
 
-
 function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFormProps) {
-    // this one needs to have forms to ask for all the information required
-    // and to save it to the state of the parent 
-    // need:
-        // players
-        // course
-        // 9 or 18 holes
-        // front or back nine
+    
     const [playerFormContent, setPlayerFormContent] = useState("")
+
+// *************************************************************************************//  
 
     const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if (e === null){
@@ -30,9 +25,16 @@ function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFo
 
     const handlePlayerFormSubmit = (e : any) => {
         e.preventDefault();
-        console.log(playerFormContent)
         addPlayerToRound(playerFormContent)
         setPlayerFormContent("")
+    }
+
+    const handleBeginRoundSubmit = (e: any) => {
+        e.preventDefault();
+        if (playerFormContent !== ""){
+            addPlayerToRound(playerFormContent)
+        }
+        submitRound()
     }
 
 // *************************************************************************************//
@@ -62,7 +64,8 @@ function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFo
     }
 
 // *************************************************************************************//
-// Conditionally rendering a form
+// conditional redering logic for the form
+
     let playerForm : any
     if (players.length < 4) {
         playerForm = (
@@ -106,7 +109,7 @@ function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFo
                     {playerForm}
                 </Paper>
 
-                <Button style={{marginBottom: '1rem'}} variant="contained" onClick={() => submitRound()}>
+                <Button style={{marginBottom: '1rem'}} variant="contained" onClick={handleBeginRoundSubmit}>
                         SAVE AND BEGIN ROUND
                 </Button>
 
