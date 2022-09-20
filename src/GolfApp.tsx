@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { initialCourse, initialPlayers, initialScorecard } from './initialValues'
+import { initialCourse, pauatahanui, initialPlayers, initialScorecard, allButtonsNotSelected } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
@@ -8,41 +8,22 @@ import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
 
 
-// need to keep a few things in state and a few things can be set to props(? - state or props for players names)
-// State:
-    // round info - set once and will not change until reset - wipe clean on reset
-    //      - course
-    //      - players
-    //      - 9 or 18 holes 
-    // current hole
-    // scores of previous holes - update as you submit the scores for the current hole
-    // isRoundSetUp - starts as false and renders setup form. When the form is submitted we can set it to false 
-    // isRoundFinished - will need to make a final scorecard component that will show up at the end after the last hole
-    // probably want one at the end of the front nine
-
-
-
 function GolfApp() {
 
-    const allButtonsNotSelected = [
-        [false,false,false,false,false,false], 
-        [false,false,false,false,false,false], 
-        [false,false,false,false,false,false], 
-        [false,false,false,false,false,false], 
-    ]
+// *************************************************************************************//
+// State    
 
     const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
     const [isRoundSetUp, setIsRoundSetUp] = useState(false)
     const [showScorecard, setShowScorecard] = useState(false)
-    const [courseInfo, setCourseInfo] = useState(initialCourse)
+    const [courseInfo, setCourseInfo] = useState(pauatahanui)
     const [players, setPlayers] = useState(initialPlayers)
     const [scorecard, setScorecard] = useState(initialScorecard)
     const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
     const [value, setValue] = useState(0);
 
-    // const setUpRound () {
-    //     //sets the players and course info for the round and generates a new blank scorecard
-    // }
+// *************************************************************************************//
+// Functions
 
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
         let newScorecard = scorecard;
@@ -61,7 +42,7 @@ function GolfApp() {
     const nextHole = (currentHoleIndex: number, scorecard: number[][]) => {
         let isThereEmptyScores = scorecard[currentHoleIndex].some(score => score === 0) // should give true or false
         if (isThereEmptyScores) {
-            return alert('Need to check all the players scores')  // can make a better system for this later
+            return alert('Oi, check all the players scores!')  // can make a better system for this later
         }
         
         if (currentHoleIndex < courseInfo.numHoles - 1) {
@@ -85,10 +66,7 @@ function GolfApp() {
     }
 
     const reset = () => {
-       // setIsRoundSetUp(false) // will need this for my set up form
-       // setPlayers([])
-       // setCourseInfo(not sure what goes here)
-       const blankScorecard = [ // need to figure out why this wouldnt work as planned
+        const blankScorecard = [
         [0,0,0,0],
         [0,0,0,0],
         [0,0,0,0],
@@ -98,15 +76,14 @@ function GolfApp() {
         [0,0,0,0],
         [0,0,0,0],
         [0,0,0,0],
-    ]
-
-       setCurrentHoleIndex(0);
-       setScorecard(blankScorecard);
-       setShowScorecard(false)
-       console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
-       setIsButtonSelected(allButtonsNotSelected)
-       setIsRoundSetUp(false)
-       setPlayers([])
+        ]
+        setCurrentHoleIndex(0);
+        setScorecard(blankScorecard);
+        setShowScorecard(false)
+        console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
+        setIsButtonSelected(allButtonsNotSelected)
+        setIsRoundSetUp(false)
+        setPlayers([])
     }
 
     const addPlayerToRound = (newPlayerName: string): void => {
@@ -120,6 +97,7 @@ function GolfApp() {
     }
 
 // *************************************************************************************//
+// Styles
 
     const paperStyles: React.CSSProperties = {
         padding: 0,
@@ -129,8 +107,8 @@ function GolfApp() {
     }
 
 // *************************************************************************************//
+// Conditional rendering of main page
 
-    // Conditional rendering of main page
     let mainPageRender;
 
     if (isRoundSetUp === false) {
@@ -162,6 +140,9 @@ function GolfApp() {
             isButtonSelected={isButtonSelected}
             />)
     } 
+
+// *************************************************************************************//
+// Return
 
     return(
         <Paper style={paperStyles}elevation={0}>

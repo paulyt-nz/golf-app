@@ -21,6 +21,9 @@ interface MainScorecardDisplayProps {
 
 function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScorecard, holeIndex, nextHole, scorecard, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected}: MainScorecardDisplayProps) {
     
+// *************************************************************************************//
+// Styles
+
     const gridStyles1: React.CSSProperties = { 
         marginTop: "1rem",
         display: "flex",
@@ -37,13 +40,20 @@ function MainScorecardDisplay ({name, par, strokeIndex, tee, players, updateScor
         width: '500px'
     }
 
+// *************************************************************************************//
+// Functions 
+    
     const handleClick = () => {
         nextHole(holeIndex, scorecard)
     }
 
+// *************************************************************************************//
+// Return    
+
     return (
         <Grid container style={gridStyles1}>
             <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
+
                 <HoleInfoCard
                     name={name} 
                     par={par}

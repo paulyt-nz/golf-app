@@ -15,12 +15,10 @@ interface PlayerCardProps {
 //  - score so far
 //  - +/- par so far
 //  - last hole score
-//
-// Also need to sort out the buttons properly - more options, map over them
+//  - more button options
 
 function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSelectThisButtonAndDeselectTheRestOfThem, isButtonSelected }: PlayerCardProps) {
-    const [isSelected, setIsSelected] = useState([false,false,false,false,false,false]);
-
+    
     const listItemStyles = {
         height: "64px",
         display: "flex",
@@ -32,12 +30,12 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
 
     return(
         <Paper style={{marginBottom: '1rem'}}>
+            
             <ListItem style={{ height: "64px" }}>{playerName}</ListItem>
             
             <Divider />
 
             <ListItem style={listItemStyles}> 
-               
                 {buttonScores.map((buttonScore, i) => (
                     <ScoreButton 
                         playerIndex={playerIndex} 
@@ -48,9 +46,8 @@ function PlayerCard({ playerName, playerIndex, updateScorecard, holeIndex, useSe
                         useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem} 
                         buttonIndex={i} />
                 ))}
+            </ListItem> 
 
-            </ListItem>
-            
         </Paper>
     )
 

@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Typography, Paper, ListItem, Divider, Button, IconButton } from '@mui/material';
+
+import { Button } from '@mui/material';
 
 
 interface ScoreButtonProps {
