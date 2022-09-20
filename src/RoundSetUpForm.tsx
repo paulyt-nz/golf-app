@@ -19,18 +19,19 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
         // front or back nine
     const [playerFormContent, setPlayerFormContent] = useState("")
 
-    const handleChange = (e : any) => {
+    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         if (e === null){
             return null
         }
         setPlayerFormContent(e.target.value)
-        
+        console.log(e.target.value)
     }
 
     const handlePlayerFormSubmit = (e : any) => {
         e.preventDefault();
+        console.log(playerFormContent)
         addPlayerToRound(playerFormContent)
-        e.target.value = ""
+        setPlayerFormContent("")
     }
 
     const gridStyles1: React.CSSProperties = { 
@@ -57,40 +58,50 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
         alignItems: "center" 
     }
 
+// Conditionally rendering a form
+    let playerForm : any
+    if (players.length < 4) {
+        playerForm = (
+            <form onSubmit={handlePlayerFormSubmit} >
+                <TextField
+                    // value={}
+                    value={playerFormContent}
+                    onChange={handleChange}
+                    margin="normal"
+                    label="Add New Player"
+                    fullWidth
+                />
+            </form>
+        )
+    } else {
+        playerForm = <h2>ENJOY YOUR ROUND</h2>
+    }
+ 
+
 
     return(
         <>
         <Grid container style={gridStyles1}>
             <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
-        <Card style={cardStyles}>
-            <h2>Pautahanui Golf Course</h2>
-                <div style={{paddingBottom: "1rem"}}>
-                    <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes: 9</CardContent>
-                    <CardContent style={{paddingTop: '0', display:'block'}}>Players: </CardContent>
-                    <CardContent style={{paddingTop: '0', display:'block'}}>{players}</CardContent>
-                    
-                </div>
-        </Card>
 
-        
+                <Card style={cardStyles}>
+                    <h2>Pautahanui Golf Course</h2>
+                    <div style={{paddingBottom: "1rem"}}>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>9</CardContent>
+                    </div>
+                </Card>
+
+                {players.map((player, i) => 
+                    <Card style={cardStyles}>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>Player {i+1}: {player}</CardContent>
+                    </Card>
+                )}
+
                 <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
-                    <form
-                        // onSubmit={(evt) => {
-                        //     evt.preventDefault();
-                        //     addTodo(value);
-                        //     reset();
-                        // }}
-                    >
-                        <TextField
-                            // value={}
-                            onSubmit={handlePlayerFormSubmit}
-                            onChange={handleChange}
-                            margin="normal"
-                            label="Add New Player"
-                            fullWidth
-                        />
-                    </form>
-                </Paper> 
+                    {playerForm}
+                </Paper>
+
             </Grid>
         </Grid>
         </>

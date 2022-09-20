@@ -35,7 +35,7 @@ function GolfApp() {
     const [isRoundSetUp, setIsRoundSetUp] = useState(false)
     const [showScorecard, setShowScorecard] = useState(false)
     const [courseInfo, setCourseInfo] = useState(initialCourse)
-    const [players, setPlayers] = useState(['Pauly T'])
+    const [players, setPlayers] = useState(initialPlayers)
     const [scorecard, setScorecard] = useState(initialScorecard)
     const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
     const [value, setValue] = useState(0);
@@ -108,11 +108,10 @@ function GolfApp() {
        setIsRoundSetUp(false)
     }
 
-    const addPlayerToRound = (newPlayerName: string) => {
-        const newPlayers = players
-        newPlayers.push(newPlayerName)
+    const addPlayerToRound = (newPlayerName: string): void => {
+        let newPlayers = [...players, newPlayerName]
         setPlayers(newPlayers)
-        setValue(value => value + 1)
+        // setValue(value => value + 1)
     }
 
     const paperStyles: React.CSSProperties = {

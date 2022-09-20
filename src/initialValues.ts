@@ -24,11 +24,11 @@ export const initialCourse: Course = {
 }
 
 
-export const initialPlayers = [
-    'Pauly T',
-    'Marty Bull',
-    'Ross Shapley',
-    'Shane Finn'
+export const initialPlayers: [] | string[] = [
+    // 'Pauly T',
+    // 'Marty Bull',
+    // 'Ross Shapley',
+    // 'Shane Finn'
 ]
 
 
