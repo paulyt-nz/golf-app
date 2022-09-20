@@ -106,6 +106,7 @@ function GolfApp() {
        console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
        setIsButtonSelected(allButtonsNotSelected)
        setIsRoundSetUp(false)
+       setPlayers([])
     }
 
     const addPlayerToRound = (newPlayerName: string): void => {
@@ -113,6 +114,12 @@ function GolfApp() {
         setPlayers(newPlayers)
         // setValue(value => value + 1)
     }
+
+    const submitRound = (): void => {
+        setIsRoundSetUp(true)
+    }
+
+// *************************************************************************************//
 
     const paperStyles: React.CSSProperties = {
         padding: 0,
@@ -130,6 +137,7 @@ function GolfApp() {
         mainPageRender = <RoundSetUpForm 
             addPlayerToRound={addPlayerToRound}
             players={players}
+            submitRound={submitRound}
             />
 
     } else if (showScorecard === true) {

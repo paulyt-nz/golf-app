@@ -1,15 +1,16 @@
 import React, { ReactEventHandler, useState } from 'react'
-import { Paper, TextField, Grid, Card, CardContent } from '@mui/material';
+import { Paper, TextField, Grid, Card, CardContent, Button } from '@mui/material';
 
 interface RoundSetUpFormProps {
     // some function needed to handle the imports
     addPlayerToRound: (newPlayerName: string) => void
     players: string[]
+    submitRound: () => void
 }
 
 
 
-function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
+function RoundSetUpForm({ addPlayerToRound, players, submitRound }: RoundSetUpFormProps) {
     // this one needs to have forms to ask for all the information required
     // and to save it to the state of the parent 
     // need:
@@ -33,6 +34,8 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
         addPlayerToRound(playerFormContent)
         setPlayerFormContent("")
     }
+
+// *************************************************************************************//
 
     const gridStyles1: React.CSSProperties = { 
         marginTop: "1rem",
@@ -58,6 +61,7 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
         alignItems: "center" 
     }
 
+// *************************************************************************************//
 // Conditionally rendering a form
     let playerForm : any
     if (players.length < 4) {
@@ -77,7 +81,7 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
         playerForm = <h2>ENJOY YOUR ROUND</h2>
     }
  
-
+// *************************************************************************************//
 
     return(
         <>
@@ -101,6 +105,10 @@ function RoundSetUpForm({ addPlayerToRound, players }: RoundSetUpFormProps) {
                 <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
                     {playerForm}
                 </Paper>
+
+                <Button style={{marginBottom: '1rem'}} variant="contained" onClick={() => submitRound()}>
+                        SAVE AND BEGIN ROUND
+                </Button>
 
             </Grid>
         </Grid>
