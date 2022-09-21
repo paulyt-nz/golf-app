@@ -6,7 +6,7 @@ import NavBar from './NavBar';
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
-import { Player, Scorecard, NumHoles, Course } from './commonTypes'
+import { Player, Scorecard, NumHoles, Course, Buttons } from './commonTypes'
 
 
 function GolfApp(): JSX.Element {
@@ -29,9 +29,13 @@ function GolfApp(): JSX.Element {
 // Functions
 
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
+        console.log('############ START OF updateScorecard  ###############')
+        console.log('scorecard: ', scorecard)
         let newScorecard = scorecard;
         newScorecard[holeIndex][playerIndex] = score;
+        console.log('new scorecard: ', newScorecard)
         setScorecard(newScorecard)
+        console.log('############   END OF updateScorecard  ###############')
     }
 
     const useSelectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
@@ -54,14 +58,8 @@ function GolfApp(): JSX.Element {
             toggleScorecard()
         }
 
-        const resetButtons = [
-            [false,false,false,false,false,false], 
-            [false,false,false,false,false,false], 
-            [false,false,false,false,false,false], 
-            [false,false,false,false,false,false], 
-        ]
+        const resetButtons = createBlankButtonStateArray()
         setIsButtonSelected(resetButtons);
-        console.log('all buttons selected from nextHole(): ', allButtonsNotSelected)
     }
 
     const toggleScorecard = () => {
@@ -69,22 +67,10 @@ function GolfApp(): JSX.Element {
     }
 
     const reset = () => {
-        const blankScorecard = [
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        [0,0,0,0],
-        ]
+        setScorecard(createBlankScorecardArray());
         setCurrentHoleIndex(0);
-        setScorecard(blankScorecard);
         setShowScorecard(false)
-        console.log('all buttons not selected - inside reset(): ', allButtonsNotSelected )
-        setIsButtonSelected(allButtonsNotSelected)
+        setIsButtonSelected(createBlankButtonStateArray())
         setIsRoundSetUp(false)
         setPlayers([])
     }
@@ -97,12 +83,24 @@ function GolfApp(): JSX.Element {
 
     const startNewRound = (): void => {
         setIsRoundSetUp(true)
+        setValue(value => value + 1)
+    }
+
+    const createBlankScorecardArray = (): Scorecard => {
+        let holeScores = new Array(players.length).fill(0);
+        let blankScorecard = new Array(numHoles).fill(holeScores);
+        return blankScorecard
+    }
+
+    const createBlankButtonStateArray = (): Buttons => {
+        let playerButtons = new Array(6).fill(false);
+        let blankButtonArray = new Array(players.length).fill(playerButtons);
+        return blankButtonArray
     }
 
     const generateNewScorecard = (): void => {
         // loop through numHoles and players making an array of arrays of 0
-        let holeScores = new Array(players.length).fill(0);
-        let newScorecard = new Array(numHoles).fill(holeScores);
+        let newScorecard = createBlankScorecardArray()
         setScorecard(newScorecard)
     }
 
