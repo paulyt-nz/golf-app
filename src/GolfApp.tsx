@@ -14,14 +14,14 @@ function GolfApp(): JSX.Element {
 // *************************************************************************************//
 // State    
 
-    const [currentHoleIndex, setCurrentHoleIndex] = useState(0)
-    const [isRoundSetUp, setIsRoundSetUp] = useState(false)
-    const [showScorecard, setShowScorecard] = useState(false)
-    const [courseInfo, setCourseInfo] = useState<Course>(pauatahanui)
-    const [players, setPlayers] = useState<Player[]>([])
-    const [scorecard, setScorecard] = useState<Scorecard>([]) 
-    const [isButtonSelected, setIsButtonSelected] = useState<ButtonState>(initialButtonState)
-    const [numHoles , setNumHoles] = useState<NumHoles>(9)
+    const [currentHoleIndex, setCurrentHoleIndex]   = useState(0)
+    const [isRoundSetUp, setIsRoundSetUp]           = useState(false)
+    const [showScorecard, setShowScorecard]         = useState(false)
+    const [courseInfo, setCourseInfo]               = useState<Course>(pauatahanui)
+    const [players, setPlayers]                     = useState<Player[]>([])
+    const [scorecard, setScorecard]                 = useState<Scorecard>([]) 
+    const [isButtonSelected, setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
+    const [numHoles , setNumHoles]                  = useState<NumHoles>(9)
 
     const [value, setValue] = useState(0);
 
@@ -35,12 +35,12 @@ function GolfApp(): JSX.Element {
         console.log("holeIndex: ", holeIndex)
         console.log('scorecard: ', scorecard)
 
-        let newScorecard = scorecard;
+        let newScorecard = [...scorecard];
         newScorecard[holeIndex][playerIndex] = score;
 
         console.log('new scorecard: ', newScorecard)
         setScorecard(newScorecard)
-        
+
         console.log('############   END OF updateScorecard  ###############')
     }
 
@@ -98,8 +98,8 @@ function GolfApp(): JSX.Element {
     }
 
     const createBlankScorecardArray = (numPlayers: number, numHoles: number): Scorecard => {
-        let holeScores = new Array(numPlayers).fill(0);
-        let blankScorecard = new Array(numHoles).fill(holeScores);
+        // let holeScores = new Array(numPlayers).fill(0);
+        let blankScorecard = new Array(numHoles).fill(0).map(i =>  new Array(numPlayers).fill(0));
         return blankScorecard
     }
 
