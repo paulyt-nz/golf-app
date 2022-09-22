@@ -16,14 +16,8 @@ interface ScoreButtonProps {
 function ScoreButton( {playerIndex, updateScorecard, holeIndex, score, isButtonSelected, useSelectThisButtonAndDeselectTheRestOfThem, buttonIndex }: ScoreButtonProps): JSX.Element {
 
     const useHandleClick = () => {
-        console.log('********** START OF useHandleClick ***********')
-        console.log("score: ", score)
-        console.log("playerIndex: ", playerIndex)
-        console.log("holeIndex: ", holeIndex)
         updateScorecard(score, playerIndex, holeIndex);
         useSelectThisButtonAndDeselectTheRestOfThem(buttonIndex, playerIndex);
-        console.log('********** END OF useHandleClick ***********')
-        console.log('---------------------------------------')
     }
     
     return(

@@ -29,19 +29,9 @@ function GolfApp(): JSX.Element {
 // Functions
 
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
-        console.log('############ START OF updateScorecard  ###############')
-        console.log("score: ", score)
-        console.log("playerIndex: ", playerIndex)
-        console.log("holeIndex: ", holeIndex)
-        console.log('scorecard: ', scorecard)
-
         let newScorecard = [...scorecard];
         newScorecard[holeIndex][playerIndex] = score;
-
-        console.log('new scorecard: ', newScorecard)
         setScorecard(newScorecard)
-
-        console.log('############   END OF updateScorecard  ###############')
     }
 
     const useSelectThisButtonAndDeselectTheRestOfThem = (indexOfThisButton: number, playerIndex: number) => {
@@ -84,12 +74,10 @@ function GolfApp(): JSX.Element {
     const addPlayerToRound = (newPlayerName: Player): void => {
         let newPlayers = [...players, newPlayerName]
         setPlayers(newPlayers)
-        // setValue(value => value + 1)
     }
 
     const startNewRound = (numPlayers: number, numHoles: number): void => {
         setIsRoundSetUp(true)
-        console.log('scorecard: ', scorecard)
         let newScorecard = createBlankScorecardArray(numPlayers, numHoles)
         setScorecard(newScorecard)
         let blankButtonStateArray = createBlankButtonStateArray(numPlayers)
@@ -98,7 +86,6 @@ function GolfApp(): JSX.Element {
     }
 
     const createBlankScorecardArray = (numPlayers: number, numHoles: number): Scorecard => {
-        // let holeScores = new Array(numPlayers).fill(0);
         let blankScorecard = new Array(numHoles).fill(0).map(i =>  new Array(numPlayers).fill(0));
         return blankScorecard
     }
@@ -110,7 +97,6 @@ function GolfApp(): JSX.Element {
     }
 
     const generateNewScorecard = (numPlayers: number, numHoles: number): void => {
-        // loop through numHoles and players making an array of arrays of 0
         let newScorecard = createBlankScorecardArray(numPlayers, numHoles)
         setScorecard(newScorecard)
     }
