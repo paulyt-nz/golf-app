@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Paper, TextField, Grid, Card, CardContent, Button } from '@mui/material';
+import { Paper, TextField, Grid, Card, CardContent, Button, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
 import { Player } from './commonTypes'
 
 interface RoundSetUpFormProps {
@@ -77,7 +77,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                     value={playerFormContent}
                     onChange={handleChange}
                     margin="normal"
-                    label="Add New Player"
+                    label="Whose playing?"
                     fullWidth
                 />
             </form>
@@ -93,6 +93,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         <Grid container style={gridStyles1}>
             <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
 
+
                 <Card style={cardStyles}>
                     <h2>Pautahanui Golf Course</h2>
                     <div style={{paddingBottom: "1rem"}}>
@@ -101,15 +102,35 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                     </div>
                 </Card>
 
+
                 {players.map((player, i) => 
                     <Card style={cardStyles}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Player {i+1}: {player}</CardContent>
                     </Card>
                 )}
 
+                <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
+                    <FormControl style={{ width: '100%'}}>
+                        <InputLabel id="demo-simple-select-label">How many holes?</InputLabel>
+                        <Select
+                            style={{ display: 'flex', justifyContent: 'stretch'}}
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            //value={age}
+                            label="Number of holes"
+                            //onChange={}
+                        >
+                            <MenuItem value={9}>9 holes</MenuItem>
+                            <MenuItem value={18}>18 holes (round twice)</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Paper>
+
+
                 <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
                     {playerForm}
                 </Paper>
+
 
                 <Button style={{marginBottom: '1rem'}} variant="contained" onClick={handleBeginRoundSubmit}>
                         SAVE AND BEGIN ROUND
