@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, ListItem, Divider } from '@mui/material';
 import ScoreButton from './ScoreButton';
-import { Player, Buttons } from './commonTypes'
+import { Player, ButtonState } from './commonTypes'
 
 interface PlayerCardProps {
     playerName: Player,
@@ -9,7 +9,7 @@ interface PlayerCardProps {
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void,
     holeIndex: number
     useSelectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
-    isButtonSelected: Buttons
+    isButtonSelected: ButtonState
 }
 
 // lots more to add in here

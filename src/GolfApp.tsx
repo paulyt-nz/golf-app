@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { initialCourse, pauatahanui, initialPlayers, initialScorecard, allButtonsNotSelected } from './initialValues'
+import { pauatahanui, initialButtonState } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
-import { Player, Scorecard, NumHoles, Course, Buttons } from './commonTypes'
+import { Player, Scorecard, NumHoles, Course, ButtonState } from './commonTypes'
 
 
 function GolfApp(): JSX.Element {
@@ -20,7 +20,7 @@ function GolfApp(): JSX.Element {
     const [courseInfo, setCourseInfo] = useState<Course>(pauatahanui)
     const [players, setPlayers] = useState<Player[]>([])
     const [scorecard, setScorecard] = useState<Scorecard>([]) 
-    const [isButtonSelected, setIsButtonSelected] = useState(allButtonsNotSelected)
+    const [isButtonSelected, setIsButtonSelected] = useState<ButtonState>(initialButtonState)
     const [numHoles , setNumHoles] = useState<NumHoles>(9)
 
     const [value, setValue] = useState(0);
@@ -30,11 +30,17 @@ function GolfApp(): JSX.Element {
 
     const updateScorecard = (score: number, playerIndex: number, holeIndex: number) => {
         console.log('############ START OF updateScorecard  ###############')
+        console.log("score: ", score)
+        console.log("playerIndex: ", playerIndex)
+        console.log("holeIndex: ", holeIndex)
         console.log('scorecard: ', scorecard)
+
         let newScorecard = scorecard;
         newScorecard[holeIndex][playerIndex] = score;
+
         console.log('new scorecard: ', newScorecard)
         setScorecard(newScorecard)
+        
         console.log('############   END OF updateScorecard  ###############')
     }
 
@@ -51,14 +57,13 @@ function GolfApp(): JSX.Element {
         if (isThereEmptyScores) {
             return alert('Oi, check all the players scores!')  // can make a better system for this later
         }
-        
         if (currentHoleIndex < courseInfo.numHoles - 1) {
             setCurrentHoleIndex(currentHoleIndex + 1);
         } else {
             toggleScorecard()
         }
 
-        const resetButtons = createBlankButtonStateArray()
+        const resetButtons = createBlankButtonStateArray(players.length)
         setIsButtonSelected(resetButtons);
     }
 
@@ -66,13 +71,14 @@ function GolfApp(): JSX.Element {
         setShowScorecard(!showScorecard)
     }
 
-    const reset = () => {
-        setScorecard(createBlankScorecardArray());
+    const reset = () => {        
         setCurrentHoleIndex(0);
         setShowScorecard(false)
-        setIsButtonSelected(createBlankButtonStateArray())
+        let blankButtonStateArray = createBlankButtonStateArray(4)
+        setIsButtonSelected(blankButtonStateArray)
         setIsRoundSetUp(false)
         setPlayers([])
+        setScorecard([])
     }
 
     const addPlayerToRound = (newPlayerName: Player): void => {
@@ -81,26 +87,31 @@ function GolfApp(): JSX.Element {
         // setValue(value => value + 1)
     }
 
-    const startNewRound = (): void => {
+    const startNewRound = (numPlayers: number, numHoles: number): void => {
         setIsRoundSetUp(true)
+        console.log('scorecard: ', scorecard)
+        let newScorecard = createBlankScorecardArray(numPlayers, numHoles)
+        setScorecard(newScorecard)
+        let blankButtonStateArray = createBlankButtonStateArray(numPlayers)
+        setIsButtonSelected(blankButtonStateArray)
         setValue(value => value + 1)
     }
 
-    const createBlankScorecardArray = (): Scorecard => {
-        let holeScores = new Array(players.length).fill(0);
+    const createBlankScorecardArray = (numPlayers: number, numHoles: number): Scorecard => {
+        let holeScores = new Array(numPlayers).fill(0);
         let blankScorecard = new Array(numHoles).fill(holeScores);
         return blankScorecard
     }
 
-    const createBlankButtonStateArray = (): Buttons => {
+    const createBlankButtonStateArray = (numPlayers: number): ButtonState => {
         let playerButtons = new Array(6).fill(false);
-        let blankButtonArray = new Array(players.length).fill(playerButtons);
+        let blankButtonArray = new Array(numPlayers).fill(playerButtons);
         return blankButtonArray
     }
 
-    const generateNewScorecard = (): void => {
+    const generateNewScorecard = (numPlayers: number, numHoles: number): void => {
         // loop through numHoles and players making an array of arrays of 0
-        let newScorecard = createBlankScorecardArray()
+        let newScorecard = createBlankScorecardArray(numPlayers, numHoles)
         setScorecard(newScorecard)
     }
 

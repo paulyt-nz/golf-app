@@ -1,5 +1,5 @@
 import { Button } from '@mui/material';
-import { Buttons } from './commonTypes'
+import { ButtonState } from './commonTypes'
 
 
 interface ScoreButtonProps {
@@ -7,7 +7,7 @@ interface ScoreButtonProps {
     updateScorecard: (score: number, playerIndex: number, holeIndex: number) => void;
     holeIndex: number;
     score: number;
-    isButtonSelected: Buttons
+    isButtonSelected: ButtonState
     useSelectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
     buttonIndex: number
 }

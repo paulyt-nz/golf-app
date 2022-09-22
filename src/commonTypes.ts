@@ -16,7 +16,7 @@ export interface Course {
     holes: [HoleInfo],
 }
 
-export type Buttons = boolean[][]
+export type ButtonState = boolean[][]
 
 export type NumHoles = 9 | 18
 

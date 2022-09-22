@@ -72,7 +72,7 @@ export const initialScorecard = [
 
 export const blankScorecard = initialScorecard
 
-export const allButtonsNotSelected = [
+export const initialButtonState = [
     [false,false,false,false,false,false], 
     [false,false,false,false,false,false], 
     [false,false,false,false,false,false], 

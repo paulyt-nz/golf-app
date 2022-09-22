@@ -2,7 +2,7 @@ import React from 'react';
 import HoleInfoCard from './HoleInfoCard';
 import PlayerCard from './PlayerCard';
 import { Grid, Button } from '@mui/material';
-import { Player, Scorecard, Buttons } from './commonTypes'
+import { Player, Scorecard, ButtonState } from './commonTypes'
 
 
 interface MainScorecardDisplayProps {
@@ -16,7 +16,7 @@ interface MainScorecardDisplayProps {
     nextHole: (currentHoleIndex: number, scorecard: Scorecard) => void;
     scorecard: Scorecard
     useSelectThisButtonAndDeselectTheRestOfThem: (indexOfThisButton: number, playerIndex: number) => void;
-    isButtonSelected: Buttons
+    isButtonSelected: ButtonState
 }
 
 

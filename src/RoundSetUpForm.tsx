@@ -6,8 +6,8 @@ interface RoundSetUpFormProps {
     // some function needed to handle the imports
     addPlayerToRound: (newPlayerName: Player ) => void,
     players: Player[],
-    startNewRound: () => void,
-    generateNewScorecard: () => void 
+    startNewRound: (numPlayers: number, numHoles: number) => void,
+    generateNewScorecard: (numPlayers: number, numHoles: number) => void 
 }
 
 
@@ -24,7 +24,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         setPlayerFormContent(e.target.value)
         console.log(e.target.value)
     }
-
+ 
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
         addPlayerToRound(playerFormContent)
@@ -32,12 +32,11 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     }
 
     const handleBeginRoundSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
         if (playerFormContent !== ""){
             addPlayerToRound(playerFormContent)
         }
-        generateNewScorecard()
-        startNewRound()
+        generateNewScorecard(players.length, 9) // ********* will need to change this one when I add an input for number of holes
+        startNewRound(players.length, 9)
     }
 
 // *************************************************************************************//
