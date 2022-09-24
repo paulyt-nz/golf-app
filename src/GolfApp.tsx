@@ -136,7 +136,8 @@ function GolfApp(): JSX.Element {
         mainPageRender = <FinalScoreCard 
             courseInfo={courseInfo}
             players={players}
-            scorecard={scorecard} 
+            scorecard={scorecard}
+            numHoles={numHoles}
             />
 
     } else {
