@@ -1,28 +1,37 @@
 import React, { useState } from 'react'
 import { Paper, TextField, Grid, Card, CardContent, Button, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { Player } from './commonTypes'
+import { Player, NumHoles } from './commonTypes'
 
 interface RoundSetUpFormProps {
     // some function needed to handle the imports
     addPlayerToRound: (newPlayerName: Player ) => void,
     players: Player[],
     startNewRound: (numPlayers: number, numHoles: number) => void,
-    generateNewScorecard: (numPlayers: number, numHoles: number) => void 
+    generateNewScorecard: (numPlayers: number, numHoles: number) => void, 
+    setRoundHoles: (holesSelected: NumHoles) => void,
+    numHoles: NumHoles
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard }: RoundSetUpFormProps): JSX.Element {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
 
 // *************************************************************************************//  
 
-    const handleChange = (e : React.ChangeEvent<HTMLInputElement>) => {
-        if (e === null){
-            return null
-        }
+    const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
         console.log(e.target.value)
+    }
+
+    const handleHoleNumChange = (e : any) => {
+       let value: NumHoles = parseInt(e.target.value)
+       console.log('value: ', value)
+       if (value === 9 || 18) {
+        setRoundHoles(value)
+       } else {
+        alert('wuut')
+       }
     }
  
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
@@ -75,7 +84,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                 <TextField
                     // value={}
                     value={playerFormContent}
-                    onChange={handleChange}
+                    onChange={handlePlayerFormChange}
                     margin="normal"
                     label="Whose playing?"
                     fullWidth
@@ -98,7 +107,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                     <h2>Pautahanui Golf Course</h2>
                     <div style={{paddingBottom: "1rem"}}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>9</CardContent>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>{numHoles}</CardContent>
                     </div>
                 </Card>
 
@@ -118,7 +127,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                             id="demo-simple-select"
                             //value={age}
                             label="Number of holes"
-                            //onChange={}
+                            onChange={handleHoleNumChange}
                         >
                             <MenuItem value={9}>9 holes</MenuItem>
                             <MenuItem value={18}>18 holes (round twice)</MenuItem>

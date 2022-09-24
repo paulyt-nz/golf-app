@@ -21,7 +21,7 @@ function GolfApp(): JSX.Element {
     const [players, setPlayers]                     = useState<Player[]>([])
     const [scorecard, setScorecard]                 = useState<Scorecard>([]) 
     const [isButtonSelected, setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
-    const [numHoles , setNumHoles]                  = useState<NumHoles>(9)
+    const [numHoles , setNumHoles]                  = useState<NumHoles>(18)
 
     const [value, setValue] = useState(0);
 
@@ -101,6 +101,12 @@ function GolfApp(): JSX.Element {
         setScorecard(newScorecard)
     }
 
+    const setRoundHoles = (holesSelected: NumHoles) => {
+        setNumHoles(holesSelected)
+    }
+
+    
+
 // *************************************************************************************//
 // Styles
 
@@ -122,6 +128,8 @@ function GolfApp(): JSX.Element {
             players={players}
             startNewRound={startNewRound}
             generateNewScorecard={generateNewScorecard}
+            setRoundHoles={setRoundHoles}
+            numHoles={numHoles}
             />
 
     } else if (showScorecard === true) {

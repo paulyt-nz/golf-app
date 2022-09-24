@@ -18,7 +18,7 @@ export interface Course {
 
 export type ButtonState = boolean[][]
 
-export type NumHoles = 9 | 18
+export type NumHoles = number // 9 | 18
 
 
 
