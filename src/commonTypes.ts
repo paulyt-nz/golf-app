@@ -16,6 +16,8 @@ export interface Course {
     holes: [HoleInfo],
 }
 
+export type RoundType = '9-once' | '18-twice' | '9-front' | '9-back' | '18-fullround'
+
 export type ButtonState = boolean[][]
 
 export type NumHoles = number // 9 | 18

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Paper, TextField, Grid, Card, CardContent, Button, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
-import { Player, NumHoles } from './commonTypes'
+import { Player, NumHoles, Course, RoundType } from './commonTypes'
+import { countReset } from 'console';
+import { JsxElement } from 'typescript';
 
 interface RoundSetUpFormProps {
     // some function needed to handle the imports
@@ -8,12 +10,13 @@ interface RoundSetUpFormProps {
     players: Player[],
     startNewRound: (numPlayers: number, numHoles: number) => void,
     generateNewScorecard: (numPlayers: number, numHoles: number) => void, 
-    setRoundHoles: (holesSelected: NumHoles) => void,
+    setRoundHoles: (round: RoundType) => void,
     numHoles: NumHoles
+    courseInfo: Course
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles }: RoundSetUpFormProps): JSX.Element {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
 
@@ -25,13 +28,10 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     }
 
     const handleHoleNumChange = (e : any) => {
-       let value: NumHoles = parseInt(e.target.value)
-       console.log('value: ', value)
-       if (value === 9 || 18) {
-        setRoundHoles(value)
-       } else {
-        alert('wuut')
-       }
+        console.log('******** inside handleHoleNumChange ********')
+       let value: RoundType = e.target.value
+       console.log(value)
+       setRoundHoles(value)
     }
  
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
@@ -96,6 +96,30 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     }
  
 // *************************************************************************************//
+// Conditional Menu Options
+
+let roundTypeOptions : JSX.Element
+
+if (courseInfo.numHoles === 9) {
+    roundTypeOptions = (
+        <>
+            <MenuItem value={'9-once'}>9 holes</MenuItem>
+            <MenuItem value={'18-twice'}>18 holes (round twice)</MenuItem>
+        </>
+    )
+} else if (courseInfo.numHoles === 18) {
+    roundTypeOptions = (
+        <>
+            <MenuItem value={'18-fullround'}>18 Holes</MenuItem>
+            <MenuItem value={'9-front'}>9 Holes - Front</MenuItem>
+            <MenuItem value={'9-back'}>9 Holes - Back</MenuItem>
+        </>
+    )
+} else {
+    roundTypeOptions = <MenuItem>SOMETHING WENT WRONG...</MenuItem>
+}
+
+// *************************************************************************************//
 
     return(
         <>
@@ -104,7 +128,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
 
                 <Card style={cardStyles}>
-                    <h2>Pautahanui Golf Course</h2>
+                    <h2>{courseInfo.name}</h2>
                     <div style={{paddingBottom: "1rem"}}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
                         <CardContent style={{paddingTop: '0', display:'block'}}>{numHoles}</CardContent>
@@ -129,8 +153,9 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                             label="Number of holes"
                             onChange={handleHoleNumChange}
                         >
-                            <MenuItem value={9}>9 holes</MenuItem>
-                            <MenuItem value={18}>18 holes (round twice)</MenuItem>
+                        
+                        {roundTypeOptions}
+                        
                         </Select>
                     </FormControl>
                 </Paper>

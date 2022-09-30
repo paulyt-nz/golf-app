@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { pauatahanui, initialButtonState } from './initialValues'
+import { pauatahanui, redwood, initialButtonState } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
-import { Player, Scorecard, NumHoles, Course, ButtonState } from './commonTypes'
+import { Player, Scorecard, NumHoles, Course, ButtonState, RoundType} from './commonTypes'
 
 
 function GolfApp(): JSX.Element {
@@ -17,11 +17,12 @@ function GolfApp(): JSX.Element {
     const [currentHoleIndex, setCurrentHoleIndex]   = useState(0)
     const [isRoundSetUp, setIsRoundSetUp]           = useState(false)
     const [showScorecard, setShowScorecard]         = useState(false)
-    const [courseInfo, setCourseInfo]               = useState<Course>(pauatahanui)
+    const [courseInfo, setCourseInfo]               = useState<Course>(redwood)
     const [players, setPlayers]                     = useState<Player[]>([])
     const [scorecard, setScorecard]                 = useState<Scorecard>([]) 
     const [isButtonSelected, setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
     const [numHoles , setNumHoles]                  = useState<NumHoles>(18)
+    const [round , setRound]                        = useState('18-fullround')
 
     const [value, setValue] = useState(0);
 
@@ -101,8 +102,13 @@ function GolfApp(): JSX.Element {
         setScorecard(newScorecard)
     }
 
-    const setRoundHoles = (holesSelected: NumHoles) => {
-        setNumHoles(holesSelected)
+    const setRoundHoles = (roundType: RoundType) => {
+        setRound(roundType)
+        if (roundType === '9-once' || '9-front' || '9-back') {
+            setNumHoles(9)
+        } else {
+            setNumHoles(18)
+        }
     }
 
     
@@ -120,7 +126,7 @@ function GolfApp(): JSX.Element {
 // *************************************************************************************//
 // Conditional rendering of main page
 
-    let mainPageRender;
+    let mainPageRender: JSX.Element;
 
     if (isRoundSetUp === false) {
         mainPageRender = <RoundSetUpForm 
@@ -130,6 +136,7 @@ function GolfApp(): JSX.Element {
             generateNewScorecard={generateNewScorecard}
             setRoundHoles={setRoundHoles}
             numHoles={numHoles}
+            courseInfo={courseInfo}
             />
 
     } else if (showScorecard === true) {
@@ -138,6 +145,7 @@ function GolfApp(): JSX.Element {
             players={players}
             scorecard={scorecard}
             numHoles={numHoles}
+            round={round}
             />
 
     } else {
