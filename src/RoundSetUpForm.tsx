@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { Paper, TextField, Grid, Card, CardContent, Button, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
 import { Player, NumHoles, Course, RoundType } from './commonTypes'
-import { countReset } from 'console';
-import { JsxElement } from 'typescript';
+
 
 interface RoundSetUpFormProps {
-    // some function needed to handle the imports
     addPlayerToRound: (newPlayerName: Player ) => void,
     players: Player[],
     startNewRound: (numPlayers: number, numHoles: number) => void,
     generateNewScorecard: (numPlayers: number, numHoles: number) => void, 
-    setRoundHoles: (round: RoundType) => void,
+    setRoundHoles: (roundType: string) => void,
     numHoles: NumHoles
     courseInfo: Course
+    round: string
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo }: RoundSetUpFormProps): JSX.Element {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo, round }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
 
@@ -24,15 +23,12 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
     const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
-        console.log(e.target.value)
     }
-
-    const handleHoleNumChange = (e : any) => {
-        console.log('******** inside handleHoleNumChange ********')
-       let value: RoundType = e.target.value
-       console.log(value)
-       setRoundHoles(value)
-    }
+    // const handleHoleNumChange = (e : any ) => {
+    //     console.log(e.target.value)
+    //     let value = e.target.value
+    //     setRoundHoles(value)
+    // }
  
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
@@ -40,12 +36,12 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         setPlayerFormContent("")
     }
 
-    const handleBeginRoundSubmit = (e: React.FormEvent) => {
+    const handleBeginRoundSubmit = () => {
         if (playerFormContent !== ""){
             addPlayerToRound(playerFormContent)
         }
-        generateNewScorecard(players.length, 9) // ********* will need to change this one when I add an input for number of holes
-        startNewRound(players.length, 9)
+        generateNewScorecard(players.length, numHoles) // ********* will need to change this one when I add an input for number of holes
+        startNewRound(players.length, numHoles)
     }
 
 // *************************************************************************************//
@@ -103,16 +99,16 @@ let roundTypeOptions : JSX.Element
 if (courseInfo.numHoles === 9) {
     roundTypeOptions = (
         <>
-            <MenuItem value={'9-once'}>9 holes</MenuItem>
-            <MenuItem value={'18-twice'}>18 holes (round twice)</MenuItem>
+            <MenuItem key='9-once' value={'9-once'}>9 holes</MenuItem>
+            <MenuItem key='18-twice' value={'18-twice'}>18 holes (round twice)</MenuItem>
         </>
     )
 } else if (courseInfo.numHoles === 18) {
     roundTypeOptions = (
         <>
-            <MenuItem value={'18-fullround'}>18 Holes</MenuItem>
-            <MenuItem value={'9-front'}>9 Holes - Front</MenuItem>
-            <MenuItem value={'9-back'}>9 Holes - Back</MenuItem>
+            <MenuItem key='18-fullround' value={'18-fullround'}>18 Holes</MenuItem>
+            <MenuItem key='9-front' value={'9-front'}>9 Holes - Front</MenuItem>
+            <MenuItem key='9-back' value={'9-back'}>9 Holes - Back</MenuItem>
         </>
     )
 } else {
@@ -122,7 +118,6 @@ if (courseInfo.numHoles === 9) {
 // *************************************************************************************//
 
     return(
-        <>
         <Grid container style={gridStyles1}>
             <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
 
@@ -131,10 +126,9 @@ if (courseInfo.numHoles === 9) {
                     <h2>{courseInfo.name}</h2>
                     <div style={{paddingBottom: "1rem"}}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>{numHoles}</CardContent>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>{round}</CardContent>
                     </div>
                 </Card>
-
 
                 {players.map((player, i) => 
                     <Card style={cardStyles}>
@@ -149,9 +143,10 @@ if (courseInfo.numHoles === 9) {
                             style={{ display: 'flex', justifyContent: 'stretch'}}
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            //value={age}
+                            value={round}
                             label="Number of holes"
-                            onChange={handleHoleNumChange}
+                            onChange={(e) => console.log('changed') }
+                            onClick={() => console.log('clicked')}
                         >
                         
                         {roundTypeOptions}
@@ -172,7 +167,6 @@ if (courseInfo.numHoles === 9) {
 
             </Grid>
         </Grid>
-        </>
     )
 
 }

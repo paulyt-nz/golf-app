@@ -102,7 +102,7 @@ function GolfApp(): JSX.Element {
         setScorecard(newScorecard)
     }
 
-    const setRoundHoles = (roundType: RoundType) => {
+    const setRoundHoles = (roundType: string) => {
         setRound(roundType)
         if (roundType === '9-once' || '9-front' || '9-back') {
             setNumHoles(9)
@@ -137,6 +137,7 @@ function GolfApp(): JSX.Element {
             setRoundHoles={setRoundHoles}
             numHoles={numHoles}
             courseInfo={courseInfo}
+            round={round}
             />
 
     } else if (showScorecard === true) {
