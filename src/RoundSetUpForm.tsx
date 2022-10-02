@@ -18,17 +18,20 @@ interface RoundSetUpFormProps {
 function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo, round }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
+    const [roundContent, setRoundContent]           = useState("")
 
 // *************************************************************************************//  
 
     const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
     }
-    // const handleHoleNumChange = (e : any ) => {
-    //     console.log(e.target.value)
-    //     let value = e.target.value
-    //     setRoundHoles(value)
-    // }
+
+    const handleHoleNumChange = (e : any ) => {
+        e.persist()
+        console.log(e.target.value)
+        let value = e.target.value as string
+        setRoundContent(value)
+    }
  
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
@@ -145,12 +148,16 @@ if (courseInfo.numHoles === 9) {
                             id="demo-simple-select"
                             value={round}
                             label="Number of holes"
-                            onChange={(e) => console.log('changed') }
+                            onChange={handleHoleNumChange}
                             onClick={() => console.log('clicked')}
                         >
                         
-                        {roundTypeOptions}
-                        
+                            {roundTypeOptions}
+
+                            <MenuItem key='18-fullround' value={'18-fullround'}>18 Holes</MenuItem>
+                            <MenuItem key='9-front' value={'9-front'}>9 Holes - Front</MenuItem>
+                            <MenuItem key='9-back' value={'9-back'}>9 Holes - Back</MenuItem>
+
                         </Select>
                     </FormControl>
                 </Paper>
@@ -162,7 +169,7 @@ if (courseInfo.numHoles === 9) {
 
 
                 <Button style={{marginBottom: '1rem'}} variant="contained" onClick={handleBeginRoundSubmit}>
-                        SAVE AND BEGIN ROUND
+                    SAVE AND BEGIN ROUND
                 </Button>
 
             </Grid>

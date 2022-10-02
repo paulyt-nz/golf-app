@@ -14,15 +14,15 @@ function GolfApp(): JSX.Element {
 // *************************************************************************************//
 // State    
 
-    const [currentHoleIndex, setCurrentHoleIndex]   = useState(0)
-    const [isRoundSetUp, setIsRoundSetUp]           = useState(false)
-    const [showScorecard, setShowScorecard]         = useState(false)
-    const [courseInfo, setCourseInfo]               = useState<Course>(redwood)
-    const [players, setPlayers]                     = useState<Player[]>([])
-    const [scorecard, setScorecard]                 = useState<Scorecard>([]) 
-    const [isButtonSelected, setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
-    const [numHoles , setNumHoles]                  = useState<NumHoles>(18)
-    const [round , setRound]                        = useState('18-fullround')
+    const [currentHoleIndex,    setCurrentHoleIndex]   = useState(0)
+    const [isRoundSetUp,        setIsRoundSetUp]       = useState(false)
+    const [showScorecard,       setShowScorecard]      = useState(false)
+    const [courseInfo,          setCourseInfo]         = useState<Course>(redwood)
+    const [players,             setPlayers]            = useState<Player[]>([])
+    const [scorecard,           setScorecard]          = useState<Scorecard>([]) 
+    const [isButtonSelected,    setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
+    const [numHoles ,           setNumHoles]           = useState<NumHoles>(18)
+    const [round ,              setRound]              = useState('18-fullround')
 
     const [value, setValue] = useState(0);
 
@@ -110,8 +110,6 @@ function GolfApp(): JSX.Element {
             setNumHoles(18)
         }
     }
-
-    
 
 // *************************************************************************************//
 // Styles
