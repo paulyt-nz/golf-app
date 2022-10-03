@@ -22,7 +22,7 @@ function GolfApp(): JSX.Element {
     const [scorecard,           setScorecard]          = useState<Scorecard>([]) 
     const [isButtonSelected,    setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
     const [numHoles ,           setNumHoles]           = useState<NumHoles>(18)
-    const [round ,              setRound]              = useState('18-fullround')
+    const [round ,              setRound]              = useState('')
 
     const [value, setValue] = useState(0);
 
@@ -103,33 +103,17 @@ function GolfApp(): JSX.Element {
     }
 
     useEffect(() => {
-        console.log('inside useEffect')
-        console.log('round: ', round)
-        console.log('numHoles', numHoles)
         generateNewScorecard(players.length, numHoles)
         startNewRound(players.length, numHoles)
     }, [round])
 
     const setRoundHoles = (roundType: string) => {
-        console.log('***** start of setRoundHoles in GolfApp *****')
-        console.log('roundType: ', roundType)
         setRound(roundType)
-        
-        console.log('round: ', round)
         if (roundType === '9-once' || roundType === '9-front' || roundType === '9-back') {
-            console.log('next to 9')
             setNumHoles(9)
-            console.log('numHoles: ', numHoles)
         } else {
-            console.log('next to 18')
             setNumHoles(18)
-            console.log('numHoles: ', numHoles)
-        }
-
-        // console.log('numHoles: ', numHoles)
-        // console.log('round: ', round)
-        // console.log('***** start of setRoundHoles in GolfApp *****')
-        
+        }        
     }
 
 // *************************************************************************************//
@@ -164,6 +148,7 @@ function GolfApp(): JSX.Element {
             players={players}
             scorecard={scorecard}
             numHoles={numHoles}
+            round={round}
             />
 
     } else {

@@ -27,17 +27,9 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     }
 
     const handleChange = (e : any) => {
-        console.log('inside handleChange')
-        console.log('value: ', e.target.value)
         setRoundContent(e.target.value)
     }
-    // const handleHoleNumChange = (e : any ) => {
-    //     e.persist()
-    //     console.log(e.target.value)
-    //     let value = e.target.value as string
-    //     setRoundContent(value)
-    // }
- 
+    
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
         addPlayerToRound(playerFormContent)
@@ -49,9 +41,6 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
             addPlayerToRound(playerFormContent)
         }
         setRoundHoles(roundContent)
-        console.log(roundContent)
-        // generateNewScorecard(players.length, numHoles)
-        // startNewRound(players.length, numHoles)
     }
 
 // *************************************************************************************//
@@ -104,7 +93,20 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 // *************************************************************************************//
 // Conditional Menu Options
 
-
+    let roundOptions
+    if (courseInfo.numHoles === 9) {
+        roundOptions = [
+            {roundLabel : '9-once', roundText: '9 Holes'},
+            {roundLabel : '18-twice', roundText: '18 Holes (twice round)'},
+            
+        ]
+    } else {
+        roundOptions = [
+            {roundLabel : '18-fullround', roundText: '18 Holes'},
+            {roundLabel : '9-front', roundText: 'Front 9'},
+            {roundLabel : '9-back', roundText: 'Back 9'},
+        ]
+    }
 
 // *************************************************************************************//
 
@@ -137,9 +139,11 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
                             label="How many holes?"
                             onChange={handleChange}
                         >
-                            <MenuItem value={'18-fullround'}>18 Holes</MenuItem>
-                            <MenuItem value={'9-front'}>Front 9</MenuItem>
-                            <MenuItem value={'9-back'}>Back 9</MenuItem>
+
+                            {roundOptions.map(r => 
+                                <MenuItem value={r.roundLabel}>{r.roundText}</MenuItem>
+                            )}
+                            
                         </Select>
                     </FormControl>
                 </Paper>
