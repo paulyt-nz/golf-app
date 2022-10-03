@@ -11,11 +11,10 @@ interface RoundSetUpFormProps {
     setRoundHoles: (roundType: string) => void,
     numHoles: NumHoles
     courseInfo: Course
-    round: string
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo, round }: RoundSetUpFormProps): JSX.Element {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo }: RoundSetUpFormProps): JSX.Element {
     
     const [playerFormContent, setPlayerFormContent] = useState("")
     const [roundContent, setRoundContent]           = useState("")
@@ -26,12 +25,17 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         setPlayerFormContent(e.target.value)
     }
 
-    const handleHoleNumChange = (e : any ) => {
-        e.persist()
-        console.log(e.target.value)
-        let value = e.target.value as string
-        setRoundContent(value)
+    const handleChange = (e : any) => {
+        console.log('inside handleChange')
+        console.log('value: ', e.target.value)
+        setRoundContent(e.target.value)
     }
+    // const handleHoleNumChange = (e : any ) => {
+    //     e.persist()
+    //     console.log(e.target.value)
+    //     let value = e.target.value as string
+    //     setRoundContent(value)
+    // }
  
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
@@ -43,7 +47,10 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         if (playerFormContent !== ""){
             addPlayerToRound(playerFormContent)
         }
-        generateNewScorecard(players.length, numHoles) // ********* will need to change this one when I add an input for number of holes
+        setRoundHoles(roundContent)
+        console.log(roundContent)
+        console.log('numholes: ', numHoles)
+        generateNewScorecard(players.length, numHoles)
         startNewRound(players.length, numHoles)
     }
 
@@ -97,26 +104,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 // *************************************************************************************//
 // Conditional Menu Options
 
-let roundTypeOptions : JSX.Element
 
-if (courseInfo.numHoles === 9) {
-    roundTypeOptions = (
-        <>
-            <MenuItem key='9-once' value={'9-once'}>9 holes</MenuItem>
-            <MenuItem key='18-twice' value={'18-twice'}>18 holes (round twice)</MenuItem>
-        </>
-    )
-} else if (courseInfo.numHoles === 18) {
-    roundTypeOptions = (
-        <>
-            <MenuItem key='18-fullround' value={'18-fullround'}>18 Holes</MenuItem>
-            <MenuItem key='9-front' value={'9-front'}>9 Holes - Front</MenuItem>
-            <MenuItem key='9-back' value={'9-back'}>9 Holes - Back</MenuItem>
-        </>
-    )
-} else {
-    roundTypeOptions = <MenuItem>SOMETHING WENT WRONG...</MenuItem>
-}
 
 // *************************************************************************************//
 
@@ -129,7 +117,7 @@ if (courseInfo.numHoles === 9) {
                     <h2>{courseInfo.name}</h2>
                     <div style={{paddingBottom: "1rem"}}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>{round}</CardContent>
+                        <CardContent style={{paddingTop: '0', display:'block'}}>{roundContent}</CardContent>
                     </div>
                 </Card>
 
@@ -140,24 +128,18 @@ if (courseInfo.numHoles === 9) {
                 )}
 
                 <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
-                    <FormControl style={{ width: '100%'}}>
+                    <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">How many holes?</InputLabel>
                         <Select
-                            style={{ display: 'flex', justifyContent: 'stretch'}}
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={round}
-                            label="Number of holes"
-                            onChange={handleHoleNumChange}
-                            onClick={() => console.log('clicked')}
+                            value={roundContent}
+                            label="How many holes?"
+                            onChange={handleChange}
                         >
-                        
-                            {roundTypeOptions}
-
-                            <MenuItem key='18-fullround' value={'18-fullround'}>18 Holes</MenuItem>
-                            <MenuItem key='9-front' value={'9-front'}>9 Holes - Front</MenuItem>
-                            <MenuItem key='9-back' value={'9-back'}>9 Holes - Back</MenuItem>
-
+                            <MenuItem value={'18-fullround'}>18 Holes</MenuItem>
+                            <MenuItem value={'9-front'}>Front 9</MenuItem>
+                            <MenuItem value={'9-back'}>Back 9</MenuItem>
                         </Select>
                     </FormControl>
                 </Paper>

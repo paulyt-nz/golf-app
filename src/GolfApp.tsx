@@ -103,12 +103,22 @@ function GolfApp(): JSX.Element {
     }
 
     const setRoundHoles = (roundType: string) => {
+        console.log('***** start of setRoundHoles in GolfApp *****')
+        console.log('roundType: ', roundType)
         setRound(roundType)
-        if (roundType === '9-once' || '9-front' || '9-back') {
+        setValue(value => value + 1)
+        console.log('round: ', round)
+        if (round === '9-once' || round === '9-front' || round === '9-back') {
+            console.log('next to 9')
             setNumHoles(9)
+            console.log('numHoles: ', numHoles)
         } else {
+            console.log('next to 19')
             setNumHoles(18)
+            console.log('numHoles: ', numHoles)
         }
+        console.log('numHoles: ', numHoles)
+        console.log('***** start of setRoundHoles in GolfApp *****')
     }
 
 // *************************************************************************************//
@@ -135,7 +145,6 @@ function GolfApp(): JSX.Element {
             setRoundHoles={setRoundHoles}
             numHoles={numHoles}
             courseInfo={courseInfo}
-            round={round}
             />
 
     } else if (showScorecard === true) {
@@ -144,7 +153,6 @@ function GolfApp(): JSX.Element {
             players={players}
             scorecard={scorecard}
             numHoles={numHoles}
-            round={round}
             />
 
     } else {

@@ -9,10 +9,9 @@ interface FinalScoreCardProps {
     players: Player[]
     courseInfo: Course
     numHoles: NumHoles
-    round: string
 }
 
-function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: FinalScoreCardProps): JSX.Element {
+function FinalScoreCard({scorecard, players, courseInfo, numHoles}: FinalScoreCardProps): JSX.Element {
     
     const frontNine: JSX.Element  = (
         <TableContainer component={Paper}>
