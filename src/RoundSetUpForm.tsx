@@ -18,6 +18,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     
     const [playerFormContent, setPlayerFormContent] = useState("")
     const [roundContent, setRoundContent]           = useState("")
+    
 
 // *************************************************************************************//  
 
@@ -49,9 +50,8 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         }
         setRoundHoles(roundContent)
         console.log(roundContent)
-        console.log('numholes: ', numHoles)
-        generateNewScorecard(players.length, numHoles)
-        startNewRound(players.length, numHoles)
+        // generateNewScorecard(players.length, numHoles)
+        // startNewRound(players.length, numHoles)
     }
 
 // *************************************************************************************//
