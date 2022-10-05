@@ -13,6 +13,20 @@ interface FinalScoreCardProps {
 }
 
 function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: FinalScoreCardProps): JSX.Element {
+
+    // make an array of holes names for tablehead
+    let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
+    let tableHead
+
+    if (round === '18-fullround' || round === '9-once'){
+        tableHead = [...tableHeadArray]
+    } else if (round === '9-front'){
+        tableHead = tableHeadArray.slice(0,9)
+    } else if (round === '9-back'){
+        tableHead = tableHeadArray.slice(9)
+    } else { // round twice on a nine hole
+        tableHead = [...tableHeadArray, ...tableHeadArray]    // double check this one will work
+    }
     
     const frontNine: JSX.Element  = (
         <TableContainer component={Paper}>
@@ -20,10 +34,10 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
 
                 <TableHead>
                 <TableRow>
-                    <TableCell>Front Nine</TableCell>
+                    <TableCell>{firstCell}</TableCell>
 
-                    {courseInfo.holes.map((hole: any) => 
-                        <TableCell align="right">{hole.name}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
+                    {tableHead.map((head: any) => 
+                        <TableCell align="right">{head}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
                     )}
                     <TableCell align="right">Total</TableCell>
                 </TableRow>
