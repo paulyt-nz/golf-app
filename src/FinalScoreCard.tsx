@@ -23,7 +23,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                     <TableCell>Front Nine</TableCell>
 
                     {courseInfo.holes.map((hole: any) => 
-                        <TableCell align="right">{hole.name}</TableCell>
+                        <TableCell align="right">{hole.name}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
                     )}
                     <TableCell align="right">Total</TableCell>
                 </TableRow>
@@ -31,7 +31,13 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
 
                 <TableBody>                      
                     {players.map((player, i) => 
-                        <PlayerRow scorecard={scorecard} player={player} playerIndex={i} />
+                        <PlayerRow 
+                            scorecard={scorecard} 
+                            player={player} 
+                            playerIndex={i} 
+                            round={round}
+                            numHoles={numHoles}
+                        />
                     )}                  
                 </TableBody>
 
@@ -39,30 +45,31 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
         </TableContainer>
     )
 
-    const backNine: JSX.Element = (
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    // const backNine: JSX.Element = (
+    //     <TableContainer component={Paper}>
+    //         <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
-                <TableHead>
-                <TableRow>
-                    <TableCell>Back Nine</TableCell>
+    //             <TableHead>
+    //             <TableRow>
+    //                 <TableCell>Back Nine</TableCell>
 
-                    {courseInfo.holes.map((hole: any) => 
-                        <TableCell align="right">{hole.name}</TableCell>
-                    )}
-                    <TableCell align="right">Total</TableCell>
-                </TableRow>
-                </TableHead>
+    //                 {courseInfo.holes.map((hole: any) => 
+    //                     <TableCell align="right">{hole.name}</TableCell>              // THIS IS MY FIRST ISSUE
+    //                 )}
 
-                <TableBody>                      
-                    {players.map((player, i) => 
-                        <PlayerRow scorecard={scorecard} player={player} playerIndex={i} />
-                    )}                  
-                </TableBody>
+    //                 <TableCell align="right">Total</TableCell>
+    //             </TableRow>
+    //             </TableHead>
 
-            </Table>
-        </TableContainer>
-    )
+    //             <TableBody>                      
+    //                 {players.map((player, i) => 
+    //                     <PlayerRow scorecard={scorecard} player={player} playerIndex={i} />
+    //                 )}                  
+    //             </TableBody>
+
+    //         </Table>
+    //     </TableContainer>
+    // )
 
     return (
         <>
@@ -72,7 +79,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
 
             {frontNine}
 
-            {backNine}
+            {/* {backNine} */}
                      
         </>
  

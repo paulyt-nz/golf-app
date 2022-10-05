@@ -28,18 +28,31 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
     const handleChange = (e : any) => {
         setRoundContent(e.target.value)
+        console.log('round form changing')
+        console.log(e.target.value)
     }
     
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
         e.preventDefault();
         addPlayerToRound(playerFormContent)
         setPlayerFormContent("")
+        console.log('submitting player')
     }
 
     const handleBeginRoundSubmit = () => {
-        if (playerFormContent !== ""){
-            addPlayerToRound(playerFormContent)
+        // if (playerFormContent !== ""){
+        //     addPlayerToRound(playerFormContent)
+        // }
+        if (!players.length) {
+            return alert('need some players')
         }
+        if (players.length > 4) {
+            return alert('how did you select more than 4 players???')
+        }
+        if (roundContent === "") {
+            return alert('need to select a round')
+        }
+        console.log("handle form submit")
         setRoundHoles(roundContent)
     }
 

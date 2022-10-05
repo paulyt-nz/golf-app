@@ -1,0 +1,7 @@
+Will keep a list of todos here 
+
+- zero players bug. If no players are added to setup form we are currently still able to set up a round
+
+- change the text in the info card when you select a round type (number of holes)
+
+- got some wierd bugs in my set up form

@@ -78,6 +78,8 @@ function GolfApp(): JSX.Element {
     }
 
     const startNewRound = (numPlayers: number, numHoles: number): void => {
+        if (!players.length) return  // a little hacky maybe but it works for now
+
         setIsRoundSetUp(true)
         let newScorecard = createBlankScorecardArray(numPlayers, numHoles)
         setScorecard(newScorecard)
@@ -102,11 +104,6 @@ function GolfApp(): JSX.Element {
         setScorecard(newScorecard)
     }
 
-    useEffect(() => {
-        generateNewScorecard(players.length, numHoles)
-        startNewRound(players.length, numHoles)
-    }, [round])
-
     const setRoundHoles = (roundType: string) => {
         setRound(roundType)
         if (roundType === '9-once' || roundType === '9-front' || roundType === '9-back') {
@@ -115,6 +112,12 @@ function GolfApp(): JSX.Element {
             setNumHoles(18)
         }        
     }
+
+    useEffect(() => {
+        generateNewScorecard(players.length, numHoles)
+        startNewRound(players.length, numHoles)
+        console.log('use effect is running')
+    }, [round])
 
 // *************************************************************************************//
 // Styles
