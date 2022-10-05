@@ -15,17 +15,32 @@ interface FinalScoreCardProps {
 function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: FinalScoreCardProps): JSX.Element {
 
     // make an array of holes names for tablehead
+
+    interface ScorecardOptions {
+        tableHeadFirstNine: string []
+        tableHeadSecondNine: string [] | null
+        tableTitleTop: string
+        tableTitleBottom: string | null
+        frontScorecard: Scorecard
+        backScorecard: Scorecard | null
+    }
+    
+    let options : ScorecardOptions
     let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
-    let tableHead
 
     if (round === '18-fullround' || round === '9-once'){
-        tableHead = [...tableHeadArray]
+        options.tableHeadFront = tableHeadArray.slice(0,9)
+        options.tableHeadBack = tableHeadArray.slice(9)
     } else if (round === '9-front'){
-        tableHead = tableHeadArray.slice(0,9)
+        options.tableHeadFront = tableHeadArray.slice(0,9)
+        
     } else if (round === '9-back'){
-        tableHead = tableHeadArray.slice(9)
+        options.tableHeadFront = tableHeadArray.slice(0,9)
+        options.tableHeadBack = tableHeadArray.slice(0,9)
+        
     } else { // round twice on a nine hole
-        tableHead = [...tableHeadArray, ...tableHeadArray]    // double check this one will work
+        options.tableHeadFront = [...tableHeadArray]
+        options.tableHeadBack = [...tableHeadArray]
     }
     
     const frontNine: JSX.Element  = (
@@ -34,7 +49,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
 
                 <TableHead>
                 <TableRow>
-                    <TableCell>{firstCell}</TableCell>
+                     <TableCell>Front Nine</TableCell>   {/*// make this condtional too - when I have front and back nine broken out */}
 
                     {tableHead.map((head: any) => 
                         <TableCell align="right">{head}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
