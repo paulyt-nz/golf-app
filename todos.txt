@@ -5,3 +5,7 @@ Will keep a list of todos here
 - change the text in the info card when you select a round type (number of holes)
 
 - got some wierd bugs in my set up form
+
+- the use effect is doing something weird and causing it to not work properly when you refresh
+
+- need to make sure my round finishes at the right place somehow

@@ -21,38 +21,79 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
         tableHeadSecondNine: string [] | null
         tableTitleTop: string
         tableTitleBottom: string | null
-        frontScorecard: Scorecard
-        backScorecard: Scorecard | null
+        topScorecard: Scorecard
+        bottomScorecard: Scorecard
     }
     
-    let options : ScorecardOptions
+    const options : ScorecardOptions = {
+        tableHeadFirstNine: [''],
+        tableHeadSecondNine: null,
+        tableTitleTop: '',
+        tableTitleBottom: null,
+        topScorecard: scorecard,
+        bottomScorecard: scorecard
+    }
+
     let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
 
-    if (round === '18-fullround' || round === '9-once'){
-        options.tableHeadFront = tableHeadArray.slice(0,9)
-        options.tableHeadBack = tableHeadArray.slice(9)
+    if (round === '18-fullround') {
+
+        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+        options.tableHeadSecondNine = tableHeadArray.slice(9),
+        options.tableTitleTop = "Front Nine",
+        options.tableTitleBottom = "Back Nine",
+        options.topScorecard = scorecard.slice(0,9),
+        options.bottomScorecard = scorecard.slice(9)
+        
+    } else if (round === '9-once'){
+        
+        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+        options.tableHeadSecondNine = null,
+        options.tableTitleTop = "Front Nine",
+        options.tableTitleBottom = null,
+        options.topScorecard = scorecard,
+        options.bottomScorecard = scorecard
+        
+
     } else if (round === '9-front'){
-        options.tableHeadFront = tableHeadArray.slice(0,9)
+        
+        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+        options.tableHeadSecondNine = null,
+        options.tableTitleTop = "Front Nine",
+        options.tableTitleBottom = null,
+        options.topScorecard = scorecard,
+        options.bottomScorecard = scorecard
         
     } else if (round === '9-back'){
-        options.tableHeadFront = tableHeadArray.slice(0,9)
-        options.tableHeadBack = tableHeadArray.slice(0,9)
         
-    } else { // round twice on a nine hole
-        options.tableHeadFront = [...tableHeadArray]
-        options.tableHeadBack = [...tableHeadArray]
+        options.tableHeadFirstNine = tableHeadArray.slice(9),
+        options.tableHeadSecondNine = null,
+        options.tableTitleTop = "Back Nine",
+        options.tableTitleBottom = null,
+        options.topScorecard = scorecard,
+        options.bottomScorecard = scorecard
+        
+    } else { // last one is round twice on a nine hole
+        
+        options.tableHeadFirstNine = [...tableHeadArray],
+        options.tableHeadSecondNine =  [...tableHeadArray],
+        options.tableTitleTop = "First Nine",
+        options.tableTitleBottom = "Second Nine",
+        options.topScorecard = scorecard.slice(0,9),
+        options.bottomScorecard = scorecard.slice(9)
+         
     }
     
-    const frontNine: JSX.Element  = (
-        <TableContainer component={Paper}>
+    const topCard: JSX.Element  = (
+        <TableContainer component={Paper} style={{margin: '5px'}}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
                 <TableHead>
                 <TableRow>
-                     <TableCell>Front Nine</TableCell>   {/*// make this condtional too - when I have front and back nine broken out */}
+                     <TableCell>{options.tableTitleTop}</TableCell>   {/*// make this condtional too - when I have front and back nine broken out */}
 
-                    {tableHead.map((head: any) => 
-                        <TableCell align="right">{head}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
+                    {options.tableHeadFirstNine.map((header: any) => 
+                        <TableCell align="right">{header}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
                     )}
                     <TableCell align="right">Total</TableCell>
                 </TableRow>
@@ -61,11 +102,9 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                 <TableBody>                      
                     {players.map((player, i) => 
                         <PlayerRow 
-                            scorecard={scorecard} 
+                            scorecard={options.topScorecard} 
                             player={player} 
                             playerIndex={i} 
-                            round={round}
-                            numHoles={numHoles}
                         />
                     )}                  
                 </TableBody>
@@ -74,41 +113,52 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
         </TableContainer>
     )
 
-    // const backNine: JSX.Element = (
-    //     <TableContainer component={Paper}>
-    //         <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    let bottomCard: JSX.Element | null
+    
+    if (options.tableHeadSecondNine === null || options.tableTitleBottom === null) {
+        bottomCard = null
+    } else {
+        bottomCard = (
 
-    //             <TableHead>
-    //             <TableRow>
-    //                 <TableCell>Back Nine</TableCell>
+            <TableContainer component={Paper} style={{margin: '5px'}}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
 
-    //                 {courseInfo.holes.map((hole: any) => 
-    //                     <TableCell align="right">{hole.name}</TableCell>              // THIS IS MY FIRST ISSUE
-    //                 )}
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>{options.tableTitleBottom}</TableCell>
 
-    //                 <TableCell align="right">Total</TableCell>
-    //             </TableRow>
-    //             </TableHead>
+                        {options.tableHeadSecondNine.map((hole: any) => 
+                            <TableCell align="right">{hole.name}</TableCell>
+                        )}
 
-    //             <TableBody>                      
-    //                 {players.map((player, i) => 
-    //                     <PlayerRow scorecard={scorecard} player={player} playerIndex={i} />
-    //                 )}                  
-    //             </TableBody>
+                        <TableCell align="right">Total</TableCell>
+                    </TableRow>
+                    </TableHead>
 
-    //         </Table>
-    //     </TableContainer>
-    // )
+                    <TableBody>                      
+                        {players.map((player, i) => 
+                            <PlayerRow 
+                                scorecard={options.bottomScorecard} 
+                                player={player} 
+                                playerIndex={i} 
+                            />
+                        )}                  
+                    </TableBody>
+
+                </Table>
+            </TableContainer>
+        )
+    }
 
     return (
         <>
-            <Paper>
+            <Paper style={{margin: '5px'}}>
                 {courseInfo.name}
             </Paper>
 
-            {frontNine}
+            {topCard}
 
-            {/* {backNine} */}
+            {bottomCard}   {/* set to null when playing nine holes */}
                      
         </>
  

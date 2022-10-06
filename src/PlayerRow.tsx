@@ -6,11 +6,9 @@ interface PlayerRowProps {
     scorecard: Scorecard
     player: Player
     playerIndex: number
-    round: string
-    numHoles: number
 }
 
-function PlayerRow({scorecard, player, playerIndex, round, numHoles}: PlayerRowProps) : JSX.Element {
+function PlayerRow({scorecard, player, playerIndex}: PlayerRowProps) : JSX.Element {
 
     const sumScores = (playerIndex: number, scorecard: Scorecard): number => {
         let sum = 0;
