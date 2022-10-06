@@ -152,8 +152,8 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
 
     return (
         <>
-            <Paper style={{margin: '5px'}}>
-                {courseInfo.name}
+            <Paper style={{margin: '5px', textAlign: 'center'}}>
+                <h1 style={{padding: '10px'}}>{courseInfo.name}</h1>
             </Paper>
 
             {topCard}
