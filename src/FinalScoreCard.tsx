@@ -127,8 +127,8 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                     <TableRow>
                         <TableCell>{options.tableTitleBottom}</TableCell>
 
-                        {options.tableHeadSecondNine.map((hole: any) => 
-                            <TableCell align="right">{hole.name}</TableCell>
+                        {options.tableHeadSecondNine.map((header: any) => 
+                            <TableCell align="right">{header}</TableCell>
                         )}
 
                         <TableCell align="right">Total</TableCell>
