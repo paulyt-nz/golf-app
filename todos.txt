@@ -9,3 +9,5 @@ Will keep a list of todos here
 - the use effect is doing something weird and causing it to not work properly when you refresh
 
 - need to make sure my round finishes at the right place somehow
+
+- still some serious bugs in the initial form and final scorecard

@@ -37,13 +37,20 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
     let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
 
     if (round === '18-fullround') {
-
+        options
         options.tableHeadFirstNine = tableHeadArray.slice(0,9),
         options.tableHeadSecondNine = tableHeadArray.slice(9),
         options.tableTitleTop = "Front Nine",
         options.tableTitleBottom = "Back Nine",
         options.topScorecard = scorecard.slice(0,9),
         options.bottomScorecard = scorecard.slice(9)
+
+        // options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+        // options.tableHeadSecondNine = tableHeadArray.slice(9),
+        // options.tableTitleTop = "Front Nine",
+        // options.tableTitleBottom = "Back Nine",
+        // options.topScorecard = scorecard.slice(0,9),
+        // options.bottomScorecard = scorecard.slice(9)
         
     } else if (round === '9-once'){
         
@@ -95,6 +102,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                     {options.tableHeadFirstNine.map((header: any) => 
                         <TableCell align="right">{header}</TableCell>      // THIS IS MY FIRST ISSUE - need to make the holes line up with the round we have selected
                     )}
+
                     <TableCell align="right">Total</TableCell>
                 </TableRow>
                 </TableHead>
@@ -126,7 +134,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                     <TableHead>
                     <TableRow>
                         <TableCell>{options.tableTitleBottom}</TableCell>
-
+                        
                         {options.tableHeadSecondNine.map((header: any) => 
                             <TableCell align="right">{header}</TableCell>
                         )}
