@@ -22,5 +22,14 @@ export type ButtonState = boolean[][]
 
 export type NumHoles = number // 9 | 18
 
+export interface ScorecardOptions {
+    tableHeadFirstNine: string []
+    tableHeadSecondNine: string [] | null
+    tableTitleTop: string
+    tableTitleBottom: string | null
+    topScorecard: Scorecard
+    bottomScorecard: Scorecard
+}
+
 
 

@@ -11,3 +11,5 @@ Will keep a list of todos here
 - need to make sure my round finishes at the right place somehow
 
 - still some serious bugs in the initial form and final scorecard
+
+- My options thing is not a one and done at the initial set up because it relies on the updated scorecards.... will need to fix this

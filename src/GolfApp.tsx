@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { pauatahanui, redwood, initialButtonState } from './initialValues'
+import { pauatahanui, redwood, initialButtonState, initialOptions } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
 
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
-import { Player, Scorecard, NumHoles, Course, ButtonState, RoundType} from './commonTypes'
+import { Player, Scorecard, NumHoles, Course, ButtonState, RoundType, ScorecardOptions} from './commonTypes'
+import { StringifyOptions } from 'querystring';
 
 
 function GolfApp(): JSX.Element {
@@ -23,6 +24,7 @@ function GolfApp(): JSX.Element {
     const [isButtonSelected,    setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
     const [numHoles ,           setNumHoles]           = useState<NumHoles>(18)
     const [round ,              setRound]              = useState('')
+    const [options,             setOptions]            = useState<ScorecardOptions>(initialOptions)
 
     const [value, setValue] = useState(0);
 
@@ -116,8 +118,68 @@ function GolfApp(): JSX.Element {
     useEffect(() => {
         generateNewScorecard(players.length, numHoles)
         startNewRound(players.length, numHoles)
+        setRoundOptions(round)
         console.log('use effect is running')
     }, [round])
+
+    
+    const setRoundOptions = (roundType : string) => {
+        let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
+
+        if (roundType === '18-fullround') {
+            
+            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+            options.tableHeadSecondNine = tableHeadArray.slice(9),
+            options.tableTitleTop = "Front Nine",
+            options.tableTitleBottom = "Back Nine",
+            options.topScorecard = scorecard.slice(0,9),
+            options.bottomScorecard = scorecard.slice(9)
+
+            // options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+            // options.tableHeadSecondNine = tableHeadArray.slice(9),
+            // options.tableTitleTop = "Front Nine",
+            // options.tableTitleBottom = "Back Nine",
+            // options.topScorecard = scorecard.slice(0,9),
+            // options.bottomScorecard = scorecard.slice(9)
+            
+        } else if (roundType === '9-once'){
+            
+            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+            options.tableHeadSecondNine = null,
+            options.tableTitleTop = "Front Nine",
+            options.tableTitleBottom = null,
+            options.topScorecard = scorecard,
+            options.bottomScorecard = scorecard
+            
+
+        } else if (roundType === '9-front'){
+            
+            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
+            options.tableHeadSecondNine = null,
+            options.tableTitleTop = "Front Nine",
+            options.tableTitleBottom = null,
+            options.topScorecard = scorecard,
+            options.bottomScorecard = scorecard
+            
+        } else if (roundType === '9-back'){
+            
+            options.tableHeadFirstNine = tableHeadArray.slice(9),
+            options.tableHeadSecondNine = null,
+            options.tableTitleTop = "Back Nine",
+            options.tableTitleBottom = null,
+            options.topScorecard = scorecard,
+            options.bottomScorecard = scorecard
+            
+        } else { // last one is round twice on a nine hole
+            
+            options.tableHeadFirstNine = [...tableHeadArray],
+            options.tableHeadSecondNine =  [...tableHeadArray],
+            options.tableTitleTop = "First Nine",
+            options.tableTitleBottom = "Second Nine",
+            options.topScorecard = scorecard.slice(0,9),
+            options.bottomScorecard = scorecard.slice(9)
+        }
+    }
 
 // *************************************************************************************//
 // Styles
@@ -152,6 +214,7 @@ function GolfApp(): JSX.Element {
             scorecard={scorecard}
             numHoles={numHoles}
             round={round}
+            options={options}
             />
 
     } else {

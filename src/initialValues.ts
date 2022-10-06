@@ -1,3 +1,5 @@
+import { ScorecardOptions } from "./commonTypes"
+
 export interface Course {
     name: string,
     location: string,
@@ -78,3 +80,12 @@ export const initialButtonState = [
     [false,false,false,false,false,false], 
     [false,false,false,false,false,false], 
 ]
+
+export const initialOptions : ScorecardOptions = {
+    tableHeadFirstNine: [''],
+    tableHeadSecondNine: null,
+    tableTitleTop: '',
+    tableTitleBottom: null,
+    topScorecard: initialScorecard,
+    bottomScorecard: initialScorecard
+}

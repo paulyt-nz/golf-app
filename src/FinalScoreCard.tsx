@@ -2,7 +2,7 @@ import React from 'react';
 import { Course } from './initialValues'
 import PlayerRow from './PlayerRow'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import { Player, Scorecard, NumHoles } from './commonTypes'
+import { Player, Scorecard, NumHoles, ScorecardOptions } from './commonTypes'
 
 interface FinalScoreCardProps {
     scorecard: Scorecard
@@ -10,86 +10,17 @@ interface FinalScoreCardProps {
     courseInfo: Course
     numHoles: NumHoles
     round: string
+    options: ScorecardOptions
 }
 
-function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: FinalScoreCardProps): JSX.Element {
+function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, options}: FinalScoreCardProps): JSX.Element {
 
     // make an array of holes names for tablehead
 
-    interface ScorecardOptions {
-        tableHeadFirstNine: string []
-        tableHeadSecondNine: string [] | null
-        tableTitleTop: string
-        tableTitleBottom: string | null
-        topScorecard: Scorecard
-        bottomScorecard: Scorecard
-    }
+   
     
-    const options : ScorecardOptions = {
-        tableHeadFirstNine: [''],
-        tableHeadSecondNine: null,
-        tableTitleTop: '',
-        tableTitleBottom: null,
-        topScorecard: scorecard,
-        bottomScorecard: scorecard
-    }
-
-    let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
-
-    if (round === '18-fullround') {
-        options
-        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-        options.tableHeadSecondNine = tableHeadArray.slice(9),
-        options.tableTitleTop = "Front Nine",
-        options.tableTitleBottom = "Back Nine",
-        options.topScorecard = scorecard.slice(0,9),
-        options.bottomScorecard = scorecard.slice(9)
-
-        // options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-        // options.tableHeadSecondNine = tableHeadArray.slice(9),
-        // options.tableTitleTop = "Front Nine",
-        // options.tableTitleBottom = "Back Nine",
-        // options.topScorecard = scorecard.slice(0,9),
-        // options.bottomScorecard = scorecard.slice(9)
-        
-    } else if (round === '9-once'){
-        
-        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-        options.tableHeadSecondNine = null,
-        options.tableTitleTop = "Front Nine",
-        options.tableTitleBottom = null,
-        options.topScorecard = scorecard,
-        options.bottomScorecard = scorecard
-        
-
-    } else if (round === '9-front'){
-        
-        options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-        options.tableHeadSecondNine = null,
-        options.tableTitleTop = "Front Nine",
-        options.tableTitleBottom = null,
-        options.topScorecard = scorecard,
-        options.bottomScorecard = scorecard
-        
-    } else if (round === '9-back'){
-        
-        options.tableHeadFirstNine = tableHeadArray.slice(9),
-        options.tableHeadSecondNine = null,
-        options.tableTitleTop = "Back Nine",
-        options.tableTitleBottom = null,
-        options.topScorecard = scorecard,
-        options.bottomScorecard = scorecard
-        
-    } else { // last one is round twice on a nine hole
-        
-        options.tableHeadFirstNine = [...tableHeadArray],
-        options.tableHeadSecondNine =  [...tableHeadArray],
-        options.tableTitleTop = "First Nine",
-        options.tableTitleBottom = "Second Nine",
-        options.topScorecard = scorecard.slice(0,9),
-        options.bottomScorecard = scorecard.slice(9)
-         
-    }
+     
+    
     
     const topCard: JSX.Element  = (
         <TableContainer component={Paper} style={{margin: '5px'}}>
@@ -110,7 +41,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round}: Final
                 <TableBody>                      
                     {players.map((player, i) => 
                         <PlayerRow 
-                            scorecard={options.topScorecard} 
+                            scorecard={options.topScorecard} // INTRODUCED A BUG HERE
                             player={player} 
                             playerIndex={i} 
                         />
