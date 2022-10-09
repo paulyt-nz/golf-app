@@ -52,6 +52,232 @@ export const redwood: Course = {
     ]
 }
 
+export const miramar : Course = {
+    name: "Miramar Golf Course",
+    location: "Miramar, Wellington",
+    numHoles: 18,
+    holes: [
+        { name: 'Hole 1',  par: 4, strokeIndex: 1,  tee: 366},
+        { name: 'Hole 2',  par: 5, strokeIndex: 9,  tee: 526},
+        { name: 'Hole 3',  par: 4, strokeIndex: 10, tee: 365},
+        { name: 'Hole 4',  par: 4, strokeIndex: 6,  tee: 398},
+        { name: 'Hole 5',  par: 5, strokeIndex: 17, tee: 507},
+        { name: 'Hole 6',  par: 3, strokeIndex: 16, tee: 179},
+        { name: 'Hole 7',  par: 4, strokeIndex: 5,  tee: 366},
+        { name: 'Hole 8',  par: 3, strokeIndex: 4,  tee: 206},
+        { name: 'Hole 9',  par: 4, strokeIndex: 14, tee: 329},
+        { name: 'Hole 10', par: 4, strokeIndex: 11, tee: 369},
+        { name: 'Hole 11', par: 3, strokeIndex: 12, tee: 182},
+        { name: 'Hole 12', par: 4, strokeIndex: 15, tee: 321},
+        { name: 'Hole 13', par: 3, strokeIndex: 18, tee: 111},
+        { name: 'Hole 14', par: 4, strokeIndex: 3,  tee: 299},
+        { name: 'Hole 15', par: 5, strokeIndex: 8,  tee: 464},
+        { name: 'Hole 16', par: 3, strokeIndex: 13, tee: 169},
+        { name: 'Hole 17', par: 4, strokeIndex: 7,  tee: 401},
+        { name: 'Hole 18', par: 4, strokeIndex: 2,  tee: 435}
+    ]
+}
+
+export const kapiti : Course = {
+    name: "Kapiti Golf Course",
+    location: "Paraparaumu, Kapiti Coast",
+    numHoles: 9,
+    holes: [
+        { name: 'Hole 1',  par: 4, strokeIndex: 5, tee: 314},
+        { name: 'Hole 2',  par: 3, strokeIndex: 4, tee: 179},
+        { name: 'Hole 3',  par: 4, strokeIndex: 6, tee: 207},
+        { name: 'Hole 4',  par: 3, strokeIndex: 8, tee: 174},
+        { name: 'Hole 5',  par: 4, strokeIndex: 1, tee: 343},
+        { name: 'Hole 6',  par: 4, strokeIndex: 9, tee: 243},
+        { name: 'Hole 7',  par: 4, strokeIndex: 7, tee: 248},
+        { name: 'Hole 8',  par: 4, strokeIndex: 3, tee: 333},
+        { name: 'Hole 9',  par: 4, strokeIndex: 2, tee: 374}
+    ]
+}
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+// export const : Course = {
+//     name: "",
+//     location: "",
+//     numHoles: ,
+//     holes: [
+//         { name: 'Hole 1',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 2',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 3',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 4',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 5',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 6',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 7',  par: , strokeIndex:,  tee: },
+//         { name: 'Hole 8',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 9',  par: , strokeIndex: , tee: },
+//         { name: 'Hole 10', par: , strokeIndex: , tee: },
+//         { name: 'Hole 11', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 12', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 13', par: , strokeIndex: , tee: },
+//         { name: 'Hole 14', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 15', par: , strokeIndex: , tee: },
+//         { name: 'Hole 16', par: , strokeIndex: , tee: },
+//         { name: 'Hole 17', par: , strokeIndex:,  tee: },
+//         { name: 'Hole 18', par: , strokeIndex:,  tee: }
+//     ]
+// }
+
+
 
 export const initialPlayers: [] | string[] = []
 
@@ -86,6 +312,4 @@ export const initialOptions : ScorecardOptions = {
     tableHeadSecondNine: null,
     tableTitleTop: '',
     tableTitleBottom: null,
-    topScorecard: initialScorecard,
-    bottomScorecard: initialScorecard
 }

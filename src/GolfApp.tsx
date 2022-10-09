@@ -139,15 +139,6 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine = tableHeadArray.slice(9);
             newOptions.tableTitleTop = "Front Nine";
             newOptions.tableTitleBottom = "Back Nine";
-            // newOptions.topScorecard = scorecard.slice(0,9);
-            // newOptions.bottomScorecard = scorecard.slice(9);
-
-            // newOptions.tableHeadFirstNine = tableHeadArray.slice(0,9),
-            // newOptions.tableHeadSecondNine = tableHeadArray.slice(9),
-            // newOptions.tableTitleTop = "Front Nine",
-            // newOptions.tableTitleBottom = "Back Nine",
-            // newOptions.topScorecard = scorecard.slice(0,9),
-            // newOptions.bottomScorecard = scorecard.slice(9)
             
         } else if (roundType === '9-once'){
             
@@ -155,8 +146,6 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine = null;
             newOptions.tableTitleTop = "Front Nine";
             newOptions.tableTitleBottom = null;
-            // newOptions.topScorecard = scorecard;
-            // newOptions.bottomScorecard = scorecard;
             
 
         } else if (roundType === '9-front'){
@@ -165,8 +154,6 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine = null;
             newOptions.tableTitleTop = "Front Nine";
             newOptions.tableTitleBottom = null;
-            // newOptions.topScorecard = scorecard;
-            // newOptions.bottomScorecard = scorecard;
             
         } else if (roundType === '9-back'){
             
@@ -174,8 +161,6 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine = null;
             newOptions.tableTitleTop = "Back Nine";
             newOptions.tableTitleBottom = null;
-            // newOptions.topScorecard = scorecard;
-            // newOptions.bottomScorecard = scorecard;
             
         } else { // last one is round twice on a nine hole
             
@@ -183,8 +168,6 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine =  [...tableHeadArray];
             newOptions.tableTitleTop = "First Nine";
             newOptions.tableTitleBottom = "Second Nine";
-            // newOptions.topScorecard = scorecard.slice(0,9);
-            // newOptions.bottomScorecard = scorecard.slice(9);
         }
 
         setOptions(newOptions)
@@ -197,7 +180,6 @@ function GolfApp(): JSX.Element {
         } else if (roundType === '9-once'){
             setTopScorecard(scorecard)
             setBottomScorecard(scorecard)
-
        } else if (roundType === '9-front'){
             setTopScorecard(scorecard)
             setBottomScorecard(scorecard)
