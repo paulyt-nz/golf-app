@@ -143,20 +143,25 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         ]
     }
 
+const infoCard : JSX.Element = (
+    <Card style={cardStyles}>
+        <h2>{courseInfo === undefined ? "" : courseInfo.name}</h2>
+        <div style={{paddingBottom: "1rem"}}>
+            {/* <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent> */}
+            <CardContent style={{paddingTop: '0', display:'block'}}>{roundContent}</CardContent>
+        </div>
+    </Card>
+)
+
+
 // *************************************************************************************//
 
     return(
         <Grid container style={gridStyles1}>
             <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
 
-
-                <Card style={cardStyles}>
-                    <h2>{courseInfo === undefined ? "" : courseInfo.name}</h2>
-                    <div style={{paddingBottom: "1rem"}}>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>{roundContent}</CardContent>
-                    </div>
-                </Card>
+                {courseInfo === undefined ? null : infoCard}
+                
 
                 {players.map((player, i) => 
                     <Card style={cardStyles}>
