@@ -25,6 +25,8 @@ function GolfApp(): JSX.Element {
     const [numHoles ,           setNumHoles]           = useState<NumHoles>(18)
     const [round ,              setRound]              = useState('')
     const [options,             setOptions]            = useState<ScorecardOptions>(initialOptions)
+    const [topScorecard,        setTopScorecard]       = useState<Scorecard>([])
+    const [bottomScorecard,      setBottomScorecard]   = useState<Scorecard>([])    
 
     const [value, setValue] = useState(0);
 
@@ -122,63 +124,90 @@ function GolfApp(): JSX.Element {
         console.log('use effect is running')
     }, [round])
 
+    useEffect(() => {
+        splitScorecard(round)
+    }, [scorecard])
+
     
     const setRoundOptions = (roundType : string) => {
         let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
+        let newOptions = {...initialOptions}
 
         if (roundType === '18-fullround') {
             
-            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-            options.tableHeadSecondNine = tableHeadArray.slice(9),
-            options.tableTitleTop = "Front Nine",
-            options.tableTitleBottom = "Back Nine",
-            options.topScorecard = scorecard.slice(0,9),
-            options.bottomScorecard = scorecard.slice(9)
+            newOptions.tableHeadFirstNine = tableHeadArray.slice(0,9);
+            newOptions.tableHeadSecondNine = tableHeadArray.slice(9);
+            newOptions.tableTitleTop = "Front Nine";
+            newOptions.tableTitleBottom = "Back Nine";
+            // newOptions.topScorecard = scorecard.slice(0,9);
+            // newOptions.bottomScorecard = scorecard.slice(9);
 
-            // options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-            // options.tableHeadSecondNine = tableHeadArray.slice(9),
-            // options.tableTitleTop = "Front Nine",
-            // options.tableTitleBottom = "Back Nine",
-            // options.topScorecard = scorecard.slice(0,9),
-            // options.bottomScorecard = scorecard.slice(9)
+            // newOptions.tableHeadFirstNine = tableHeadArray.slice(0,9),
+            // newOptions.tableHeadSecondNine = tableHeadArray.slice(9),
+            // newOptions.tableTitleTop = "Front Nine",
+            // newOptions.tableTitleBottom = "Back Nine",
+            // newOptions.topScorecard = scorecard.slice(0,9),
+            // newOptions.bottomScorecard = scorecard.slice(9)
             
         } else if (roundType === '9-once'){
             
-            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-            options.tableHeadSecondNine = null,
-            options.tableTitleTop = "Front Nine",
-            options.tableTitleBottom = null,
-            options.topScorecard = scorecard,
-            options.bottomScorecard = scorecard
+            newOptions.tableHeadFirstNine = tableHeadArray.slice(0,9);
+            newOptions.tableHeadSecondNine = null;
+            newOptions.tableTitleTop = "Front Nine";
+            newOptions.tableTitleBottom = null;
+            // newOptions.topScorecard = scorecard;
+            // newOptions.bottomScorecard = scorecard;
             
 
         } else if (roundType === '9-front'){
             
-            options.tableHeadFirstNine = tableHeadArray.slice(0,9),
-            options.tableHeadSecondNine = null,
-            options.tableTitleTop = "Front Nine",
-            options.tableTitleBottom = null,
-            options.topScorecard = scorecard,
-            options.bottomScorecard = scorecard
+            newOptions.tableHeadFirstNine = tableHeadArray.slice(0,9);
+            newOptions.tableHeadSecondNine = null;
+            newOptions.tableTitleTop = "Front Nine";
+            newOptions.tableTitleBottom = null;
+            // newOptions.topScorecard = scorecard;
+            // newOptions.bottomScorecard = scorecard;
             
         } else if (roundType === '9-back'){
             
-            options.tableHeadFirstNine = tableHeadArray.slice(9),
-            options.tableHeadSecondNine = null,
-            options.tableTitleTop = "Back Nine",
-            options.tableTitleBottom = null,
-            options.topScorecard = scorecard,
-            options.bottomScorecard = scorecard
+            newOptions.tableHeadFirstNine = tableHeadArray.slice(9);
+            newOptions.tableHeadSecondNine = null;
+            newOptions.tableTitleTop = "Back Nine";
+            newOptions.tableTitleBottom = null;
+            // newOptions.topScorecard = scorecard;
+            // newOptions.bottomScorecard = scorecard;
             
         } else { // last one is round twice on a nine hole
             
-            options.tableHeadFirstNine = [...tableHeadArray],
-            options.tableHeadSecondNine =  [...tableHeadArray],
-            options.tableTitleTop = "First Nine",
-            options.tableTitleBottom = "Second Nine",
-            options.topScorecard = scorecard.slice(0,9),
-            options.bottomScorecard = scorecard.slice(9)
+            newOptions.tableHeadFirstNine = [...tableHeadArray];
+            newOptions.tableHeadSecondNine =  [...tableHeadArray];
+            newOptions.tableTitleTop = "First Nine";
+            newOptions.tableTitleBottom = "Second Nine";
+            // newOptions.topScorecard = scorecard.slice(0,9);
+            // newOptions.bottomScorecard = scorecard.slice(9);
         }
+
+        setOptions(newOptions)
+    }
+
+    const splitScorecard = (roundType : string) => {
+        if (roundType === '18-fullround') {
+            setTopScorecard(scorecard.slice(0,9))
+            setBottomScorecard(scorecard.slice(9))
+        } else if (roundType === '9-once'){
+            setTopScorecard(scorecard)
+            setBottomScorecard(scorecard)
+
+       } else if (roundType === '9-front'){
+            setTopScorecard(scorecard)
+            setBottomScorecard(scorecard)
+        } else if (roundType === '9-back'){
+            setTopScorecard(scorecard)
+            setBottomScorecard(scorecard)
+       } else { // last one is round twice on a nine hole
+            setTopScorecard(scorecard.slice(0,9))
+            setBottomScorecard(scorecard.slice(9))
+       }
     }
 
 // *************************************************************************************//
@@ -215,6 +244,8 @@ function GolfApp(): JSX.Element {
             numHoles={numHoles}
             round={round}
             options={options}
+            topScorecard={topScorecard}
+            bottomScorecard={bottomScorecard}
             />
 
     } else {

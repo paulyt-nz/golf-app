@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Course } from './initialValues'
 import PlayerRow from './PlayerRow'
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
@@ -11,14 +11,20 @@ interface FinalScoreCardProps {
     numHoles: NumHoles
     round: string
     options: ScorecardOptions
+    topScorecard: Scorecard
+    bottomScorecard: Scorecard
 }
 
-function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, options}: FinalScoreCardProps): JSX.Element {
+function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, options, topScorecard, bottomScorecard}: FinalScoreCardProps): JSX.Element {
 
     // make an array of holes names for tablehead
+    // [topScorecard, setTopScorecard] = useState<Scorecard>([])
+    // [bottomScorecard, setBottomScorecard] = useState<Scorecard>([])     
 
-   
-    
+    // useEffect(() => {
+    //     if()
+    // })
+    // can come back to this if needed
      
     
     
@@ -41,7 +47,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, option
                 <TableBody>                      
                     {players.map((player, i) => 
                         <PlayerRow 
-                            scorecard={options.topScorecard} // INTRODUCED A BUG HERE
+                            scorecard={topScorecard} // INTRODUCED A BUG HERE
                             player={player} 
                             playerIndex={i} 
                         />
@@ -77,7 +83,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, option
                     <TableBody>                      
                         {players.map((player, i) => 
                             <PlayerRow 
-                                scorecard={options.bottomScorecard} 
+                                scorecard={bottomScorecard} 
                                 player={player} 
                                 playerIndex={i} 
                             />

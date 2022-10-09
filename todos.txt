@@ -12,4 +12,7 @@ Will keep a list of todos here
 
 - still some serious bugs in the initial form and final scorecard
 
-- My options thing is not a one and done at the initial set up because it relies on the updated scorecards.... will need to fix this
+- My options thing is not a one and done at the initial set up because it relies on the updated scorecards.... will need to fix this.
+
+-Try to find a golf course API and use it to load in all of the gold courses in NZ if possible
+
