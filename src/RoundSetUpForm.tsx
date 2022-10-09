@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Paper, TextField, Grid, Card, CardContent, Button, InputLabel, MenuItem, Select, FormControl } from '@mui/material';
 import { Player, NumHoles, Course, RoundType } from './commonTypes'
+import { courses } from './courses'
 
 
 interface RoundSetUpFormProps {
@@ -10,23 +11,39 @@ interface RoundSetUpFormProps {
     generateNewScorecard: (numPlayers: number, numHoles: number) => void, 
     setRoundHoles: (roundType: string) => void,
     numHoles: NumHoles
-    courseInfo: Course
+    courseInfo: Course | undefined
+    setNewCourse: (newCourse : Course) => void,
 }
 
 
-function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo }: RoundSetUpFormProps): JSX.Element {
+function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewScorecard, setRoundHoles, numHoles, courseInfo, setNewCourse }: RoundSetUpFormProps): JSX.Element {
     
-    const [playerFormContent, setPlayerFormContent] = useState("")
-    const [roundContent, setRoundContent]           = useState("")
+    const [ playerFormContent, setPlayerFormContent ] = useState("")
+    const [ roundContent, setRoundContent ]           = useState("")
+    const [ selectedCourse, setSelectedCourse ]       = useState<Course>()
     
 
 // *************************************************************************************//  
+
+    useEffect(() => {
+        if (selectedCourse === undefined) {
+            return
+        } else {
+        setNewCourse(selectedCourse)
+        }
+    }, [selectedCourse])
 
     const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
     }
 
-    const handleChange = (e : any) => {
+    const handleCourseChange = (e : any) => {
+        console.log(e.target.value)
+        let course = JSON.parse(e.target.value)
+        setSelectedCourse(course)
+    } 
+
+    const handleRoundChange = (e : any) => {
         setRoundContent(e.target.value)
         console.log('round form changing')
         console.log(e.target.value)
@@ -107,7 +124,12 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 // Conditional Menu Options
 
     let roundOptions
-    if (courseInfo.numHoles === 9) {
+    if (courseInfo === undefined) {
+        roundOptions = [
+            {roundLabel : '', roundText: ''}, 
+        ]
+    }
+    else if (courseInfo.numHoles === 9) {
         roundOptions = [
             {roundLabel : '9-once', roundText: '9 Holes'},
             {roundLabel : '18-twice', roundText: '18 Holes (twice round)'},
@@ -129,7 +151,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
 
                 <Card style={cardStyles}>
-                    <h2>{courseInfo.name}</h2>
+                    <h2>{courseInfo === undefined ? "" : courseInfo.name}</h2>
                     <div style={{paddingBottom: "1rem"}}>
                         <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent>
                         <CardContent style={{paddingTop: '0', display:'block'}}>{roundContent}</CardContent>
@@ -144,13 +166,37 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
                 <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
                     <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Select Course</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={selectedCourse}
+                            label="Select Course"
+                            onChange={handleCourseChange}
+                        >
+{/* 
+                            {for (let course in courses) {
+                                <MenuItem value={course}>{course.name}</MenuItem>
+                            }} */}
+
+                            {courses.map(course => 
+                                <MenuItem value={JSON.stringify(course)}>{course.name}</MenuItem>    // if courses was an array this might work
+                            )}
+                            
+                        </Select>
+                    </FormControl>
+                </Paper>
+
+
+                <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
+                    <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">How many holes?</InputLabel>
                         <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
                             value={roundContent}
                             label="How many holes?"
-                            onChange={handleChange}
+                            onChange={handleRoundChange}
                         >
 
                             {roundOptions.map(r => 

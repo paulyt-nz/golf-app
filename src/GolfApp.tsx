@@ -7,7 +7,6 @@ import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
 import { Player, Scorecard, NumHoles, Course, ButtonState, RoundType, ScorecardOptions} from './commonTypes'
-import { StringifyOptions } from 'querystring';
 
 
 function GolfApp(): JSX.Element {
@@ -18,7 +17,7 @@ function GolfApp(): JSX.Element {
     const [currentHoleIndex,    setCurrentHoleIndex]   = useState(0)
     const [isRoundSetUp,        setIsRoundSetUp]       = useState(false)
     const [showScorecard,       setShowScorecard]      = useState(false)
-    const [courseInfo,          setCourseInfo]         = useState<Course>(redwood)
+    const [courseInfo,          setCourseInfo]         = useState<Course>()
     const [players,             setPlayers]            = useState<Player[]>([])
     const [scorecard,           setScorecard]          = useState<Scorecard>([]) 
     const [isButtonSelected,    setIsButtonSelected]   = useState<ButtonState>(initialButtonState)
@@ -26,7 +25,7 @@ function GolfApp(): JSX.Element {
     const [round ,              setRound]              = useState('')
     const [options,             setOptions]            = useState<ScorecardOptions>(initialOptions)
     const [topScorecard,        setTopScorecard]       = useState<Scorecard>([])
-    const [bottomScorecard,      setBottomScorecard]   = useState<Scorecard>([])    
+    const [bottomScorecard,     setBottomScorecard]    = useState<Scorecard>([])    
 
     const [value, setValue] = useState(0);
 
@@ -52,6 +51,7 @@ function GolfApp(): JSX.Element {
         if (isThereEmptyScores) {
             return alert('Oi, check all the players scores!')  // can make a better system for this later
         }
+        if (courseInfo === undefined) return
         if (currentHoleIndex < courseInfo.numHoles - 1) {
             setCurrentHoleIndex(currentHoleIndex + 1);
         } else {
@@ -74,6 +74,7 @@ function GolfApp(): JSX.Element {
         setIsRoundSetUp(false)
         setPlayers([])
         setScorecard([])
+        setCourseInfo(undefined)
     }
 
     const addPlayerToRound = (newPlayerName: Player): void => {
@@ -117,6 +118,10 @@ function GolfApp(): JSX.Element {
         }        
     }
 
+    const setNewCourse = (newCourse : Course) => {
+        setCourseInfo(newCourse)
+    }
+
     useEffect(() => {
         generateNewScorecard(players.length, numHoles)
         startNewRound(players.length, numHoles)
@@ -130,6 +135,7 @@ function GolfApp(): JSX.Element {
 
     
     const setRoundOptions = (roundType : string) => {
+        if (courseInfo === undefined) return
         let tableHeadArray = courseInfo.holes.map((hole : any) => hole.name)
         let newOptions = {...initialOptions}
 
@@ -216,6 +222,7 @@ function GolfApp(): JSX.Element {
             setRoundHoles={setRoundHoles}
             numHoles={numHoles}
             courseInfo={courseInfo}
+            setNewCourse={setNewCourse}
             />
 
     } else if (showScorecard === true) {
@@ -233,10 +240,10 @@ function GolfApp(): JSX.Element {
     } else {
         mainPageRender = (<MainScorecardDisplay 
             holeIndex={currentHoleIndex}
-            name={courseInfo.holes[currentHoleIndex].name} 
-            par={courseInfo.holes[currentHoleIndex].par}
-            strokeIndex={courseInfo.holes[currentHoleIndex].strokeIndex}
-            tee={courseInfo.holes[currentHoleIndex].tee}
+            name={courseInfo === undefined ? "" : courseInfo.holes[currentHoleIndex].name} 
+            par={courseInfo === undefined ? 0 : courseInfo.holes[currentHoleIndex].par}
+            strokeIndex={courseInfo === undefined ? 0 : courseInfo.holes[currentHoleIndex].strokeIndex}
+            tee={courseInfo === undefined ? 0 : courseInfo.holes[currentHoleIndex].tee}
             players={players}
             updateScorecard={updateScorecard}
             nextHole={nextHole}

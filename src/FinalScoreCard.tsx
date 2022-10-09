@@ -7,7 +7,7 @@ import { Player, Scorecard, NumHoles, ScorecardOptions } from './commonTypes'
 interface FinalScoreCardProps {
     scorecard: Scorecard
     players: Player[]
-    courseInfo: Course
+    courseInfo: Course | undefined
     numHoles: NumHoles
     round: string
     options: ScorecardOptions
@@ -98,7 +98,7 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, option
     return (
         <>
             <Paper style={{margin: '5px', textAlign: 'center'}}>
-                <h1 style={{padding: '10px'}}>{courseInfo.name}</h1>
+                <h1 style={{padding: '10px'}}>{courseInfo === undefined ? "" : courseInfo.name}</h1>
             </Paper>
 
             {topCard}
