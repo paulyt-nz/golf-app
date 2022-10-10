@@ -16,3 +16,4 @@ Will keep a list of todos here
 
 -Try to find a golf course API and use it to load in all of the gold courses in NZ if possible
 
+- next is to clean up the info card (info appears correctly when selected) and to make the forms disappear when selected

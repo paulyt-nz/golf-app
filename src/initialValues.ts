@@ -312,4 +312,5 @@ export const initialOptions : ScorecardOptions = {
     tableHeadSecondNine: null,
     tableTitleTop: '',
     tableTitleBottom: null,
+    roundMessage: ''
 }

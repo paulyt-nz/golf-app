@@ -145,6 +145,7 @@ function GolfApp(): JSX.Element {
             newOptions.tableHeadSecondNine = tableHeadArray.slice(9);
             newOptions.tableTitleTop = "Front Nine";
             newOptions.tableTitleBottom = "Back Nine";
+           
             
         } else if (roundType === '9-once'){
             
@@ -161,6 +162,7 @@ function GolfApp(): JSX.Element {
             newOptions.tableTitleTop = "Front Nine";
             newOptions.tableTitleBottom = null;
             
+            
         } else if (roundType === '9-back'){
             
             newOptions.tableHeadFirstNine = tableHeadArray.slice(9);
@@ -168,12 +170,14 @@ function GolfApp(): JSX.Element {
             newOptions.tableTitleTop = "Back Nine";
             newOptions.tableTitleBottom = null;
             
+            
         } else { // last one is round twice on a nine hole
             
             newOptions.tableHeadFirstNine = [...tableHeadArray];
             newOptions.tableHeadSecondNine =  [...tableHeadArray];
             newOptions.tableTitleTop = "First Nine";
             newOptions.tableTitleBottom = "Second Nine";
+            
         }
 
         setOptions(newOptions)
@@ -223,6 +227,7 @@ function GolfApp(): JSX.Element {
             numHoles={numHoles}
             courseInfo={courseInfo}
             setNewCourse={setNewCourse}
+            
             />
 
     } else if (showScorecard === true) {
@@ -250,6 +255,7 @@ function GolfApp(): JSX.Element {
             scorecard={scorecard}
             useSelectThisButtonAndDeselectTheRestOfThem={useSelectThisButtonAndDeselectTheRestOfThem}
             isButtonSelected={isButtonSelected}
+            
             />)
     } 
 

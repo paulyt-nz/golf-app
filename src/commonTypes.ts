@@ -27,6 +27,7 @@ export interface ScorecardOptions {
     tableHeadSecondNine: string [] | null
     tableTitleTop: string
     tableTitleBottom: string | null
+    roundMessage: string
 }
 
 

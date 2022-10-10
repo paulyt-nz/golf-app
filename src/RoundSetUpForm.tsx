@@ -21,6 +21,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
     const [ playerFormContent, setPlayerFormContent ] = useState("")
     const [ roundContent, setRoundContent ]           = useState("")
     const [ selectedCourse, setSelectedCourse ]       = useState<Course>()
+    const [ roundMessage, setRoundMessage]            = useState("")
     
 
 // *************************************************************************************//  
@@ -32,6 +33,10 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         setNewCourse(selectedCourse)
         }
     }, [selectedCourse])
+
+    useEffect(() => {
+        changeRoundMessage(roundContent)
+    }, [roundContent])
 
     const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
@@ -47,6 +52,22 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         setRoundContent(e.target.value)
         console.log('round form changing')
         console.log(e.target.value)
+    }
+
+    const changeRoundMessage = (roundString: string) => {
+        if (roundString === '9-once') {
+            setRoundMessage('9 Holes')
+        } else if (roundString === '18-twice') {
+            setRoundMessage('18 Holes (round twice)')
+        } else if (roundString === '9-front') {
+            setRoundMessage('Front 9')
+        } else if (roundString === '9-back') {
+            setRoundMessage('Back 9')
+        } else if (roundString === '18-fullround') {
+            setRoundMessage('18 Holes')
+        } else {
+            setRoundMessage("")
+        }
     }
     
     const handlePlayerFormSubmit = (e : React.FormEvent) => {
@@ -143,15 +164,19 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         ]
     }
 
+
+
 const infoCard : JSX.Element = (
     <Card style={cardStyles}>
         <h2>{courseInfo === undefined ? "" : courseInfo.name}</h2>
         <div style={{paddingBottom: "1rem"}}>
             {/* <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent> */}
-            <CardContent style={{paddingTop: '0', display:'block'}}>{roundContent}</CardContent>
+            <CardContent style={{paddingTop: '0', display:'block'}}>{ roundMessage === '' ? null : roundMessage }</CardContent>
         </div>
     </Card>
 )
+
+
 
 
 // *************************************************************************************//
