@@ -17,3 +17,10 @@ Will keep a list of todos here
 -Try to find a golf course API and use it to load in all of the gold courses in NZ if possible
 
 - next is to clean up the info card (info appears correctly when selected) and to make the forms disappear when selected
+
+- UI not very nice on the info form - I tried removing the forms once they were made but that didnt look good either
+
+- Things I can do next
+        - add in how many over par in the main scorecard
+        - add in who is winning 
+        - learn JSS and add in some nicer styling

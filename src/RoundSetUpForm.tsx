@@ -172,28 +172,14 @@ const infoCard : JSX.Element = (
         <div style={{paddingBottom: "1rem"}}>
             {/* <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent> */}
             <CardContent style={{paddingTop: '0', display:'block'}}>{ roundMessage === '' ? null : roundMessage }</CardContent>
+            {players.map((player, i) => 
+                        <CardContent style={{paddingTop: '0', display:'block'}}>Player {i+1}: {player}</CardContent>
+                )}
         </div>
     </Card>
 )
 
-
-
-
-// *************************************************************************************//
-
-    return(
-        <Grid container style={gridStyles1}>
-            <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
-
-                {courseInfo === undefined ? null : infoCard}
-                
-
-                {players.map((player, i) => 
-                    <Card style={cardStyles}>
-                        <CardContent style={{paddingTop: '0', display:'block'}}>Player {i+1}: {player}</CardContent>
-                    </Card>
-                )}
-
+const courseSelect : JSX.Element = (
                 <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Select Course</InputLabel>
@@ -216,8 +202,9 @@ const infoCard : JSX.Element = (
                         </Select>
                     </FormControl>
                 </Paper>
+)
 
-
+const holeSelect : JSX.Element = (
                 <Paper style={{ margin: "1rem 0", padding: "1rem 1rem" }}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">How many holes?</InputLabel>
@@ -236,6 +223,22 @@ const infoCard : JSX.Element = (
                         </Select>
                     </FormControl>
                 </Paper>
+)
+
+
+// *************************************************************************************//
+
+    return(
+        <Grid container style={gridStyles1}>
+            <Grid item xs={11} md={8} lg={4} style={gridStyles2}>
+
+                {courseInfo === undefined ? null : infoCard}
+                
+
+                {courseSelect}
+
+
+                {holeSelect}
 
 
                 <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
