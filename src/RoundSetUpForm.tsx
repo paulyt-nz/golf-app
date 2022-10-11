@@ -125,7 +125,7 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         paddingTop: '0',
         display:'block',
         textAlign: 'center',
-        fontSize: '1.5rem',
+        fontSize: '1.25rem',
     }
 
     const roundMessageStyles: React.CSSProperties = {
@@ -140,6 +140,10 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         fontSize: '2.5rem',
     }
     
+    const enjoy: React.CSSProperties = {
+        textAlign: 'center',
+    }
+    
 
 
     
@@ -147,23 +151,21 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 // *************************************************************************************//
 // conditional redering logic for the form
 
-    let playerForm : JSX.Element
-    if (players.length < 4) {
-        playerForm = (
-            <form onSubmit={handlePlayerFormSubmit} >
-                <TextField
-                    // value={}
-                    value={playerFormContent}
-                    onChange={handlePlayerFormChange}
-                    margin="normal"
-                    label="Whose playing?"
-                    fullWidth
-                />
-            </form>
+    let playerForm : JSX.Element = (
+            <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
+                <form onSubmit={handlePlayerFormSubmit} >
+                    <TextField
+                        // value={}
+                        value={playerFormContent}
+                        onChange={handlePlayerFormChange}
+                        margin="normal"
+                        label="Whose playing?"
+                        fullWidth
+                    />
+                </form>
+            </Paper>
         )
-    } else {
-        playerForm = <h2>ENJOY YOUR ROUND</h2>
-    }
+    
  
 // *************************************************************************************//
 // Conditional Menu Options
@@ -198,7 +200,7 @@ const infoCard : JSX.Element = (
             <CardContent style={roundMessageStyles}>{ roundMessage === '' ? null : roundMessage }</CardContent>
             
             {players.map((player, i) => 
-                <CardContent style={playerNamesStyles}>Player {i+1}: {player}</CardContent>
+                <CardContent style={playerNamesStyles}>{i+1}: {player}</CardContent>
             )}
         </div>
     </Card>
@@ -259,19 +261,13 @@ const holeSelect : JSX.Element = (
 
                 {courseInfo === undefined ? null : infoCard}
                 
-
                 {courseSelect}
-
 
                 {holeSelect}
 
+                {players.length < 4 ? playerForm : null}
 
-                <Paper style={{ margin: "1rem 0", padding: "0.1rem 1rem" }}>
-                    {playerForm}
-                </Paper>
-
-
-                <Button style={{marginBottom: '1rem'}} variant="contained" onClick={handleBeginRoundSubmit}>
+                <Button style={{marginBottom: '1rem', marginTop: '1rem'}} variant="contained" onClick={handleBeginRoundSubmit}>
                     SAVE AND BEGIN ROUND
                 </Button>
 

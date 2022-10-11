@@ -208,7 +208,7 @@ function GolfApp(): JSX.Element {
     const paperStyles: React.CSSProperties = {
         padding: 0,
         margin: 0,
-        height: "100%", // may need to go back to 100vh 
+        height: "100vh", // may need to go back to 100vh 
         backgroundColor: "#fafafa",
     }
 

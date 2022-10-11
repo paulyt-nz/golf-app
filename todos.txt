@@ -25,3 +25,6 @@ Will keep a list of todos here
         - add in who is winning 
         - learn JSS and add in some nicer styling
         - will just style with javascript
+
+- could put the scorecard into the same table so they line up properly?
+
