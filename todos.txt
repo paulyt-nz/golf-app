@@ -24,3 +24,4 @@ Will keep a list of todos here
         - add in how many over par in the main scorecard
         - add in who is winning 
         - learn JSS and add in some nicer styling
+        - will just style with javascript

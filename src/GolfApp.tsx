@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { pauatahanui, redwood, initialButtonState, initialOptions } from './initialValues'
 import MainScorecardDisplay from './MainScorecardDisplay';
 import NavBar from './NavBar';
-
 import { Paper } from '@mui/material';
 import RoundSetUpForm from './RoundSetUpForm';
 import FinalScoreCard from './FinalScoreCard';
 import { Player, Scorecard, NumHoles, Course, ButtonState, RoundType, ScorecardOptions} from './commonTypes'
+
 
 
 function GolfApp(): JSX.Element {
@@ -263,7 +263,7 @@ function GolfApp(): JSX.Element {
 // Return
 
     return(
-        <Paper style={paperStyles}elevation={0}>
+        <Paper style={paperStyles} elevation={0}>
             <NavBar toggleScorecard={toggleScorecard} scorecard={scorecard} reset={reset} />            
             {mainPageRender}
         </Paper>

@@ -120,6 +120,30 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         alignItems: "center" 
     }
 
+    
+    const playerNamesStyles: React.CSSProperties = {
+        paddingTop: '0',
+        display:'block',
+        textAlign: 'center',
+        fontSize: '1.5rem',
+    }
+
+    const roundMessageStyles: React.CSSProperties = {
+        paddingTop: '0', 
+        display:'block',
+        textAlign: 'center',
+        fontSize: '1.5rem',
+        fontWeight: '700'
+    }
+
+    const courseHeading: React.CSSProperties = {
+        fontSize: '2.5rem',
+    }
+    
+
+
+    
+
 // *************************************************************************************//
 // conditional redering logic for the form
 
@@ -168,13 +192,14 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
 
 const infoCard : JSX.Element = (
     <Card style={cardStyles}>
-        <h2>{courseInfo === undefined ? "" : courseInfo.name}</h2>
+        <h2 style={courseHeading}>{courseInfo === undefined ? "" : courseInfo.name}</h2>
         <div style={{paddingBottom: "1rem"}}>
             {/* <CardContent style={{paddingTop: '0', display:'block'}}>Number of holes:</CardContent> */}
-            <CardContent style={{paddingTop: '0', display:'block'}}>{ roundMessage === '' ? null : roundMessage }</CardContent>
+            <CardContent style={roundMessageStyles}>{ roundMessage === '' ? null : roundMessage }</CardContent>
+            
             {players.map((player, i) => 
-                        <CardContent style={{paddingTop: '0', display:'block'}}>Player {i+1}: {player}</CardContent>
-                )}
+                <CardContent style={playerNamesStyles}>Player {i+1}: {player}</CardContent>
+            )}
         </div>
     </Card>
 )
