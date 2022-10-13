@@ -28,4 +28,4 @@ Will keep a list of todos here
 
 - could put the scorecard into the same table so they line up properly?
 
-- get it to the point of storing things in local storage then deploy it
+- get it to the point of storing things in local storage then deploy it - last job!
