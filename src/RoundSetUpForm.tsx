@@ -38,6 +38,8 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         changeRoundMessage(roundContent)
     }, [roundContent])
 
+// *************************************************************************************//  
+
     const handlePlayerFormChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         setPlayerFormContent(e.target.value)
     }
@@ -144,10 +146,6 @@ function RoundSetUpForm({ addPlayerToRound, players, startNewRound, generateNewS
         textAlign: 'center',
     }
     
-
-
-    
-
 // *************************************************************************************//
 // conditional redering logic for the form
 

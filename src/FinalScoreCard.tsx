@@ -17,17 +17,22 @@ interface FinalScoreCardProps {
 
 function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, options, topScorecard, bottomScorecard}: FinalScoreCardProps): JSX.Element {
 
-    // make an array of holes names for tablehead
-    // [topScorecard, setTopScorecard] = useState<Scorecard>([])
-    // [bottomScorecard, setBottomScorecard] = useState<Scorecard>([])     
+     // *************************************************************************************//
+    // Styles
+    const titlePaper : React.CSSProperties = {
+        margin: '5px', 
+        textAlign: 'center'
+    };
 
-    // useEffect(() => {
-    //     if()
-    // })
-    // can come back to this if needed
-     
-    
-    
+    const titleH1 : React.CSSProperties = {
+        padding: '10px'
+    }
+
+
+
+    // *************************************************************************************//
+    // Conditional Rendering of top and bottom card (based on round type)
+
     const topCard: JSX.Element  = (
         <TableContainer component={Paper} style={{margin: '5px'}}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -97,8 +102,8 @@ function FinalScoreCard({scorecard, players, courseInfo, numHoles, round, option
 
     return (
         <>
-            <Paper style={{margin: '5px', textAlign: 'center'}}>
-                <h1 style={{padding: '10px'}}>{courseInfo === undefined ? "" : courseInfo.name}</h1>
+            <Paper style={titlePaper}>
+                <h1 style={titleH1}>{courseInfo === undefined ? "" : courseInfo.name}</h1>
             </Paper>
 
             {topCard}
