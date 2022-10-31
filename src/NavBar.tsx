@@ -22,7 +22,7 @@ function NavBar({ toggleScorecard, scorecard, reset }: NavBarProps) {
     return (
         <AppBar color='secondary' position='static' style={{ height: "64px" }}>
             <Toolbar style={{position: "relative"}}>
-                <Typography style={{float: "left"}} color='inherit'>WHACKF*#K</Typography>
+                <Typography style={{float: "left"}} color='inherit'>SHANKERS</Typography>
                 <Button onClick={handleScorecard} color="inherit">Scorecard</Button>
                 <Button onClick={handleReset} color="inherit">RESET</Button>
             </Toolbar>
